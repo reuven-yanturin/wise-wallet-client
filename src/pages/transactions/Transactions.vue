@@ -1,18 +1,26 @@
 <template>
   <VContainer fluid>
-    <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Transactions</h1>
+    <VRow>
+      <VCol cols="12">
+        <h1>Transactions</h1>
+      </VCol>
 
-      <VBtn color="primary" variant="flat" :to="{ name: 'transaction-create' }">
-        Add New
-      </VBtn>
-    </div>
+      <VCol cols="12" md="4">
+        <AccountsCarousel />
+      </VCol>
 
-    <VCard variant="flat" class="rounded-lg">
-      <VCardText>
-        <VDataTableServer
-          v-model:items-per-page="itemsPerPage"
-          :headers="[
+      <VCol cols="12">
+        <VBtn color="primary" variant="flat" :to="{ name: 'transaction-create' }">
+          Add New
+        </VBtn>
+      </VCol>
+
+      <VCol cols="12">
+        <VCard variant="flat" rounded="lg">
+          <VCardText>
+            <VDataTableServer
+              v-model:items-per-page="itemsPerPage"
+              :headers="[
             { title: 'Id', key: 'id' },
             { title: 'Category', key: 'category' },
             { title: 'Type', key: 'type' },
@@ -20,60 +28,67 @@
             { title: 'Account', key: 'account'  },
             { title: 'Actions', key: 'actions' },
           ]"
-          :items="transactions"
-          :items-length="totalItems"
-          :loading="loading"
-        >
-          <template #item.category="{ item }">
-            {{ item.category.name }}
-          </template>
-
-          <template #item.type="{ item }">
-            <VChip :color="item.type === 'income' ? 'success' : 'error'">
-              <template #prepend>
-                <FontAwesomeIcon v-if="item.type === 'income'" icon="arrow-trend-up" class="mr-2"/>
-
-                <FontAwesomeIcon v-if="item.type === 'expense'" icon="arrow-trend-down" class="mr-2"/>
+              :items="transactions"
+              :items-length="totalItems"
+              :loading="loading"
+            >
+              <template #item.category="{ item }">
+                {{ item.category.name }}
               </template>
 
-              {{ item.type }}
-            </VChip>
-          </template>
+              <template #item.type="{ item }">
+                <VChip :color="item.type === 'income' ? 'success' : 'error'">
+                  <template #prepend>
+                    <FontAwesomeIcon v-if="item.type === 'income'" icon="arrow-trend-up" class="mr-2"/>
 
-          <template #item.amount="{ item }">
+                    <FontAwesomeIcon v-if="item.type === 'expense'" icon="arrow-trend-down" class="mr-2"/>
+                  </template>
+
+                  {{ item.type }}
+                </VChip>
+              </template>
+
+              <template #item.amount="{ item }">
             <span :class="{'text-success': item.type === 'income', 'text-error': item.type === 'expense'}">
               {{ formatPriceMixin(item.amount) }}
             </span>
-          </template>
-
-          <template #item.account="{ item }">
-            {{ item.account.name }}
-          </template>
-
-          <template #item.actions="{ item }">
-            <div class="d-flex">
-              <span v-if="item.isDeleted">deleted</span>
-
-              <template v-else>
-                <VBtn :to="{ name: 'transaction', params: { transactionId: item.id } }">
-                  Show
-                </VBtn>
-
-                <VBtn @click="deleteTransaction(item)">delete</VBtn>
               </template>
-            </div>
-          </template>
-        </VDataTableServer>
-      </VCardText>
-    </VCard>
+
+              <template #item.account="{ item }">
+                {{ item.account.name }}
+              </template>
+
+              <template #item.actions="{ item }">
+                <div class="d-flex">
+                  <span v-if="item.isDeleted">deleted</span>
+
+                  <template v-else>
+                    <VBtn :to="{ name: 'transaction', params: { transactionId: item.id } }">
+                      Show
+                    </VBtn>
+
+                    <VBtn @click="deleteTransaction(item)">delete</VBtn>
+                  </template>
+                </div>
+              </template>
+            </VDataTableServer>
+          </VCardText>
+        </VCard>
+      </VCol>
+    </VRow>
   </VContainer>
 </template>
 
 <script>
 import api from '@/plugins/api.js'
+import AccountsCarousel from "@/components/accounts-carousel/AccountsCarousel.vue"
 
 export default {
   name: 'Transactions',
+
+  components: {
+    AccountsCarousel
+  },
 
   data: () => ({
     loading: false,
