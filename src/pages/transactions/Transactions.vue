@@ -9,10 +9,12 @@
         <AccountsCarousel />
       </VCol>
 
-      <VCol cols="12">
+      <VCol cols="12" class="d-flex gap-4">
         <VBtn color="primary" variant="flat" :to="{ name: 'transaction-create' }">
           Add New
         </VBtn>
+
+        <UploadTransactions/>
       </VCol>
 
       <VCol cols="12">
@@ -21,13 +23,13 @@
             <VDataTableServer
               v-model:items-per-page="itemsPerPage"
               :headers="[
-            { title: 'Id', key: 'id' },
-            { title: 'Category', key: 'category' },
-            { title: 'Type', key: 'type' },
-            { title: 'Amount', key: 'amount' },
-            { title: 'Account', key: 'account'  },
-            { title: 'Actions', key: 'actions' },
-          ]"
+                { title: 'Id', key: 'id' },
+                { title: 'Category', key: 'category' },
+                { title: 'Type', key: 'type' },
+                { title: 'Amount', key: 'amount' },
+                { title: 'Account', key: 'account'  },
+                { title: 'Actions', key: 'actions' },
+              ]"
               :items="transactions"
               :items-length="totalItems"
               :loading="loading"
@@ -82,11 +84,13 @@
 <script>
 import api from '@/plugins/api.js'
 import AccountsCarousel from "@/components/accounts-carousel/AccountsCarousel.vue"
+import UploadTransactions from "@/pages/transactions/UploadTransactions.vue"
 
 export default {
   name: 'Transactions',
 
   components: {
+    UploadTransactions,
     AccountsCarousel
   },
 

@@ -44,6 +44,8 @@ export default {
   transactions: {
     create: body => instance.post('transactions', body),
 
+    upload: body => instance.post(`transactions/upload`, body),
+
     getAll: params => instance.get('transactions', { params }),
 
     getOne: transactionId => instance.get(`transactions/${transactionId}`),

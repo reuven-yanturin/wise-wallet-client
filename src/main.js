@@ -15,6 +15,8 @@ import formatPriceMixin from './mixins/formatPriceMixin.js'
 import { createApp } from 'vue'
 import vuetify from "@/plugins/vuetify"
 
+import "@/assets/styles/app.scss"
+
 const app = createApp(App)
 
 app
