@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  // baseURL: import.env.VITE_APP_API_URL,
-  baseURL: 'http://localhost:8089/api/v1',
+  baseURL: import.meta.env.VITE_APP_API_URL,
   timeout: 30000
 })
 

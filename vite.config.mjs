@@ -33,6 +33,7 @@ export default defineConfig({
       },
     }),
   ],
+  base: '/wise-wallet-client/',
   define: { 'process.env': {} },
   resolve: {
     alias: {
