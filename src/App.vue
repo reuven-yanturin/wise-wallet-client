@@ -50,6 +50,7 @@ export default {
 
   mounted() {
     console.log(this.drawer, 'drawer')
+    console.log(import.meta.env.VITE_BASE_URL, 'VITE_BASE_URL')
   }
 }
 </script>
