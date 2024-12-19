@@ -1,0 +1,1 @@
+import{_ as e}from"./index-MNRb34Qu.js";const s={name:"User"};function r(n,t,a,c,o,_){return null}const i=e(s,[["render",r],["__file","/Users/reuvenyanturin/Projects/WiseWallet/admin/src/pages/users/user/User.vue"]]);export{i as default};
