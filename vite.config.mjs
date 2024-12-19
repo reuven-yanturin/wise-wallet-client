@@ -33,7 +33,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/wise-wallet-client/',
+  base: import.meta.env.VITE_APP_BASE,
   define: { 'process.env': {} },
   resolve: {
     alias: {
