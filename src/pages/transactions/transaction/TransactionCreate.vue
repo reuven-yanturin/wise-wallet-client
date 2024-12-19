@@ -80,8 +80,8 @@
 
               <VCol cols="12">
                 <VTextarea
-                  v-model="form.description"
-                  label="Description"
+                  v-model="form.note"
+                  label="Note"
                   variant="outlined"
                   density="compact"
                   hide-details="auto"
@@ -128,7 +128,7 @@ export default {
       date: undefined,
       categoryId: undefined,
       accountId: undefined,
-      description: undefined
+      note: undefined
     }
   }),
 
