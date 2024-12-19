@@ -45,6 +45,8 @@ export default {
 
         this.cookies = undefined
         this.dialog = false
+
+        this.$emit('success')
       } finally {
         this.loading = false
       }

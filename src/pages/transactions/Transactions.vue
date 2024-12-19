@@ -14,7 +14,7 @@
           Add New
         </VBtn>
 
-        <UploadTransactions/>
+        <UploadTransactions @success="getTransactions"/>
       </VCol>
 
       <VCol cols="12">
