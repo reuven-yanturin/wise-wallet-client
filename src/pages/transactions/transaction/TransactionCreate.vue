@@ -66,9 +66,6 @@
               </VCol>
 
               <VCol cols="12">
-                <pre>
-                  {{form.accountId}}
-                </pre>
                 <VAutocomplete
                   v-model="form.accountId"
                   :items="accounts"
