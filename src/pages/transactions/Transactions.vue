@@ -6,7 +6,7 @@
       </VCol>
 
       <VCol cols="12">
-        <AccountsCarousel />
+        <AccountsWidget />
       </VCol>
 
       <VCol cols="12" class="d-flex gap-4">
@@ -101,7 +101,7 @@
 
 <script>
 import api from '@/plugins/api.js'
-import AccountsCarousel from "@/components/accounts-carousel/AccountsCarousel.vue"
+import AccountsWidget from "@/components/AccountsWidget.vue"
 import UploadTransactions from "@/pages/transactions/UploadTransactions.vue"
 
 export default {
@@ -109,7 +109,7 @@ export default {
 
   components: {
     UploadTransactions,
-    AccountsCarousel
+    AccountsWidget
   },
 
   data: () => ({

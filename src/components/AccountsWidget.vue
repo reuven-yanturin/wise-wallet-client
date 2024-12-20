@@ -42,7 +42,7 @@
 import api from "@/plugins/api"
 
 export default {
-  name: "AccountsCarousel",
+  name: "AccountsWidget",
 
   data: () => ({
     loading: false,
@@ -61,8 +61,6 @@ export default {
         const { data } = await api.accounts.getList()
 
         this.accounts = data
-
-        console.log(this.accounts, "accounts")
       } finally {
         this.loading = false
       }
