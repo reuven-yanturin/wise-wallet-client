@@ -48,7 +48,7 @@ export default {
 
   data: () => ({
     loading: false,
-    itemsPerPage: 15,
+    itemsPerPage: 50,
     categories: [],
     totalItems: 0
   }),

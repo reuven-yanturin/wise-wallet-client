@@ -114,7 +114,7 @@ export default {
 
   data: () => ({
     loading: false,
-    itemsPerPage: 15,
+    itemsPerPage: 50,
 
     transactions: [],
     totalItems: 0
