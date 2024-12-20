@@ -5,7 +5,7 @@
         <h1>Transactions</h1>
       </VCol>
 
-      <VCol cols="12" md="4">
+      <VCol cols="12">
         <AccountsCarousel />
       </VCol>
 

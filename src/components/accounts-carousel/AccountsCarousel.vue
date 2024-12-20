@@ -1,10 +1,7 @@
 <template>
-  <div v-if="loading">
-    loading
-  </div>
-  <VCarousel v-else hide-delimiter-background :show-arrows="false" dark height="150" class="rounded-lg">
-    <VCarouselItem v-for="(account, index) of accounts" :key="index">
-      <VCard variant="flat" color="#191f2f" height="150">
+  <VRow>
+    <VCol v-for="(account, index) of accounts" :key="index" cols="12" md="4">
+      <VCard variant="flat" color="#191f2f" height="150" rounded="lg">
         <VCardTitle class="mt-2 mb-3 text-body-1">
           {{ account.name }}
         </VCardTitle>
@@ -15,8 +12,8 @@
           </h3>
         </VCardText>
       </VCard>
-    </VCarouselItem>
-  </VCarousel>
+    </VCol>
+  </VRow>
 </template>
 
 <script>
