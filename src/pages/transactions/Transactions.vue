@@ -43,8 +43,9 @@
               :headers="[
                 { title: 'Id', key: 'id' },
                 { title: 'Category', key: 'category' },
-                { title: 'Type', key: 'type' },
                 { title: 'Amount', key: 'amount' },
+                { title: 'Date', key: 'date' },
+                { title: 'Type', key: 'type' },
                 { title: 'Account', key: 'account'  },
                 { title: 'Actions', key: 'actions' },
               ]"
@@ -53,7 +54,21 @@
               :loading="loading"
             >
               <template #item.category="{ item }">
-                {{ item.category.name }}
+                <VListItem
+                  :title="item.category.name"
+                  :subtitle="item.note"
+                  class="pl-0"
+                />
+              </template>
+
+              <template #item.amount="{ item }">
+                <span :class="{'text-success': item.type === 'income', 'text-error': item.type === 'expense'}">
+                  {{ formatPriceMixin(item.amount) }}
+                </span>
+              </template>
+
+              <template #item.date="{ item }">
+                {{ $dayjs(item.date).format("DD MMM, YYYY HH:mm") }}
               </template>
 
               <template #item.type="{ item }">
@@ -66,12 +81,6 @@
 
                   {{ item.type }}
                 </VChip>
-              </template>
-
-              <template #item.amount="{ item }">
-            <span :class="{'text-success': item.type === 'income', 'text-error': item.type === 'expense'}">
-              {{ formatPriceMixin(item.amount) }}
-            </span>
               </template>
 
               <template #item.account="{ item }">
