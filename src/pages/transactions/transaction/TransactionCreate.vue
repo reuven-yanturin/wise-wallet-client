@@ -66,6 +66,9 @@
               </VCol>
 
               <VCol cols="12">
+                <pre>
+                  {{form.accountId}}
+                </pre>
                 <VAutocomplete
                   v-model="form.accountId"
                   :items="accounts"
@@ -115,22 +118,42 @@ export default {
   name: 'TransactionCreate',
   components: { DatePicker },
 
-  data: () => ({
+  data: ({ $route: { query } }) => ({
     loading: false,
 
     categories: [],
     accounts: [],
 
     form: {
-      type: undefined,
+      type: query.type || undefined,
       amount: 0,
       currency: 'ILS',
       date: undefined,
       categoryId: undefined,
-      accountId: undefined,
+      accountId: query.accountId ? Number(query.accountId) : undefined,
       note: undefined
     }
   }),
+
+  watch: {
+    'form.type': {
+      handler (type) {
+        this.$router.replace({
+          name: this.$route.name,
+          query: { ...this.$route.query, type }
+        })
+      }
+    },
+
+    'form.accountId': {
+      handler (accountId) {
+        this.$router.replace({
+          name: this.$route.name,
+          query: { ...this.$route.query, accountId }
+        })
+      }
+    }
+  },
 
   async created() {
     await this.fetchCategories()

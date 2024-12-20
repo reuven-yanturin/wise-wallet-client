@@ -10,9 +10,23 @@
       </VCol>
 
       <VCol cols="12" class="d-flex gap-4">
-        <VBtn color="primary" variant="flat" :to="{ name: 'transaction-create' }">
-          Add New
-        </VBtn>
+        <VMenu>
+          <template #activator="{ props }">
+            <VBtn color="primary" variant="flat"  v-bind="props">
+              Add New
+            </VBtn>
+          </template>
+
+          <VList>
+            <VListItem :to="{ name: 'transaction-create', query: { type: 'income' } }">
+              <VListItemTitle>Income</VListItemTitle>
+            </VListItem>
+
+            <VListItem :to="{ name: 'transaction-create', query: { type: 'expense' }  }">
+              <VListItemTitle>Expense</VListItemTitle>
+            </VListItem>
+          </VList>
+        </VMenu>
 
         <UploadTransactions @success="getTransactions"/>
       </VCol>
