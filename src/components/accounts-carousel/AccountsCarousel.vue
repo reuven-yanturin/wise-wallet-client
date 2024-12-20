@@ -20,6 +20,10 @@
               <VListItem :to="{ name: 'transaction-create', query: { type: 'expense', accountId: account.id }  }">
                 <VListItemTitle>Expense</VListItemTitle>
               </VListItem>
+
+              <VListItem :to="{ name: 'transaction-create', query: { type: 'transfer', accountId: account.id }  }">
+                <VListItemTitle>Transfer</VListItemTitle>
+              </VListItem>
             </VList>
           </VMenu>
         </VCardTitle>

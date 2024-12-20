@@ -25,6 +25,10 @@
             <VListItem :to="{ name: 'transaction-create', query: { type: 'expense' }  }">
               <VListItemTitle>Expense</VListItemTitle>
             </VListItem>
+
+            <VListItem :to="{ name: 'transaction-create', query: { type: 'transfer' }  }">
+              <VListItemTitle>Transfer</VListItemTitle>
+            </VListItem>
           </VList>
         </VMenu>
 
