@@ -42,19 +42,34 @@
               v-model:items-per-page="itemsPerPage"
               :headers="[
                 { title: 'Id', key: 'id' },
+                { title: 'Account', key: 'account'  },
                 { title: 'Category', key: 'category' },
                 { title: 'Amount', key: 'amount' },
                 { title: 'Date', key: 'date' },
                 { title: 'Type', key: 'type' },
-                { title: 'Account', key: 'account'  },
                 { title: 'Actions', key: 'actions' },
               ]"
               :items="transactions"
               :items-length="totalItems"
               :loading="loading"
             >
+              <template #item.account="{ item }">
+                <div class="d-flex flex-column py-2">
+                  {{ item.account.name }}
+
+                  <template v-if="item.accountTo">
+                    <span class="ml-8">
+                      <FontAwesomeIcon icon="arrow-down"/>
+                    </span>
+
+                    <span>{{ item.accountTo.name }}</span>
+                  </template>
+                </div>
+              </template>
+
               <template #item.category="{ item }">
                 <VListItem
+                  v-if="item.category"
                   :title="item.category.name"
                   :subtitle="item.note"
                   class="pl-0"
@@ -72,19 +87,17 @@
               </template>
 
               <template #item.type="{ item }">
-                <VChip :color="item.type === 'income' ? 'success' : 'error'">
+                <VChip :color="{ income: 'success', expense: 'error', transfer: 'default' }[item.type]">
                   <template #prepend>
                     <FontAwesomeIcon v-if="item.type === 'income'" icon="arrow-trend-up" class="mr-2"/>
 
                     <FontAwesomeIcon v-if="item.type === 'expense'" icon="arrow-trend-down" class="mr-2"/>
+
+                    <FontAwesomeIcon v-if="item.type === 'transfer'" icon="arrow-right-arrow-left" class="mr-2"/>
                   </template>
 
                   {{ item.type }}
                 </VChip>
-              </template>
-
-              <template #item.account="{ item }">
-                {{ item.account.name }}
               </template>
 
               <template #item.actions="{ item }">

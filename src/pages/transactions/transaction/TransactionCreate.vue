@@ -46,13 +46,10 @@
               </VCol>
 
               <VCol cols="12">
-                <DatePicker
-                  v-model="form.date"
-                  label="Date"
-                />
+                <DatePicker v-model="form.date" label="Date" />
               </VCol>
 
-              <VCol cols="12">
+              <VCol v-if="form.type !== 'transfer'" cols="12">
                 <VAutocomplete
                   v-model="form.categoryId"
                   :items="categories"
@@ -70,6 +67,19 @@
                   v-model="form.accountId"
                   :items="accounts"
                   label="Account"
+                  item-value="id"
+                  item-title="name"
+                  variant="outlined"
+                  density="compact"
+                  hide-details="auto"
+                />
+              </VCol>
+
+              <VCol v-if="form.type === 'transfer'" cols="12">
+                <VAutocomplete
+                  v-model="form.accountToId"
+                  :items="accounts"
+                  label="Account To"
                   item-value="id"
                   item-title="name"
                   variant="outlined"
@@ -128,6 +138,7 @@ export default {
       date: undefined,
       categoryId: undefined,
       accountId: query.accountId ? Number(query.accountId) : undefined,
+      accountToId: undefined,
       note: undefined
     }
   }),
@@ -188,7 +199,7 @@ export default {
       try {
         await api.transactions.create(this.form)
 
-        this.$router.push({ name: 'transactions' })
+        // this.$router.push({ name: 'transactions' })
       } finally {
         this.loading = false
       }
