@@ -199,7 +199,7 @@ export default {
       try {
         await api.transactions.create(this.form)
 
-        // this.$router.push({ name: 'transactions' })
+        this.$router.push({ name: 'transactions' })
       } finally {
         this.loading = false
       }
