@@ -1,1 +1,0 @@
-import{_ as e,c as r,o as a}from"./index-Di8MZ21r.js";import{V as s}from"./VContainer-BHpC2ZFG.js";const o={};function c(n,t){return a(),r(s)}const f=e(o,[["render",c],["__file","/Users/reuvenyanturin/Projects/WiseWallet/admin/src/pages/DashBoard.vue"]]);export{f as default};
