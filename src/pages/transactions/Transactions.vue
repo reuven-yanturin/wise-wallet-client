@@ -38,6 +38,21 @@
       <VCol cols="12">
         <VCard variant="flat" rounded="lg">
           <VCardText>
+            <VRow>
+              <VCol cols="12" md="3">
+                <DateSelect
+                  v-model:start-date="filter.startDate"
+                  v-model:end-date="filter.endDate"
+                />
+              </VCol>
+            </VRow>
+          </VCardText>
+        </VCard>
+      </VCol>
+
+      <VCol cols="12">
+        <VCard variant="flat" rounded="lg">
+          <VCardText>
             <VDataTableServer
               v-model:items-per-page="itemsPerPage"
               :headers="[
@@ -125,11 +140,13 @@
 import api from '@/plugins/api.js'
 import AccountsWidget from "@/components/AccountsWidget.vue"
 import UploadTransactions from "@/pages/transactions/UploadTransactions.vue"
+import DateSelect from "@/components/DateSelect.vue"
 
 export default {
   name: 'Transactions',
 
   components: {
+    DateSelect,
     UploadTransactions,
     AccountsWidget
   },
@@ -138,9 +155,21 @@ export default {
     loading: false,
     itemsPerPage: 50,
 
+    filter: {
+      startDate: undefined,
+      endDate: undefined,
+    },
+
     transactions: [],
     totalItems: 0
   }),
+
+  watch: {
+    filter: {
+      deep: true,
+      handler: 'getTransactions'
+    }
+  },
 
   async created() {
     await this.getTransactions()
@@ -153,7 +182,8 @@ export default {
       try {
         const { data } = await api.transactions.getAll({
           skip: 0,
-          take: this.itemsPerPage
+          take: this.itemsPerPage,
+          ...this.filter
         })
 
         this.transactions = data.transactions
