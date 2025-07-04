@@ -53,12 +53,16 @@ export default {
 
         const currentTime = this.$dayjs()
 
-        const selectedDate = this.$dayjs(value)
-          .hour(currentTime.hour())
-          .minute(currentTime.minute())
-          .second(currentTime.second())
+        if (currentTime.format("YYYY-MM-DD") === this.$dayjs(value).format("YYYY-MM-DD")) {
+          const selectedDate = this.$dayjs(value)
+            .hour(currentTime.hour())
+            .minute(currentTime.minute())
+            .second(currentTime.second())
 
-        this.$emit("update:modelValue", selectedDate.format())
+          this.$emit("update:modelValue", selectedDate.format())
+        } else {
+          this.$emit("update:modelValue", this.$dayjs(value).format())
+        }
       },
     },
   },
