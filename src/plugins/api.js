@@ -32,7 +32,7 @@ export default {
 
     getAll: params => instance.get('accounts', { params }),
 
-    getList: () => instance.get('accounts/list'),
+    getList: (params) => instance.get('accounts/list', { params }),
 
     getOne: accountId => instance.get(`accounts/${accountId}`),
 

@@ -1,6 +1,6 @@
 <template>
   <VRow>
-    <VCol v-for="(account, index) of accounts" :key="index" cols="12" md="4">
+    <VCol v-for="(account, index) of accounts" :key="index" cols="12" md="3">
       <VCard variant="flat" color="#191f2f" height="150" rounded="lg">
         <VCardTitle class="mt-2 mb-3 text-body-1 d-flex align-center">
           {{ account.name }}
@@ -58,7 +58,7 @@ export default {
       this.loading = true
 
       try {
-        const { data } = await api.accounts.getList()
+        const { data } = await api.accounts.getList({ withoutZeroBalance: true })
 
         this.accounts = data
       } finally {
