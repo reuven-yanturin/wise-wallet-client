@@ -1,55 +1,47 @@
 <template>
   <VContainer fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Add new Account</h1>
+      <h1>Добавить Новый Счёт</h1>
     </div>
 
     <VRow>
       <VCol cols="12" md="4">
         <VCard variant="flat" class="rounded-lg">
-          <VCardText>
-            <VRow>
-              <VCol cols="12">
-                <VTextField
-                  v-model="form.name"
-                  label="Name"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                />
-              </VCol>
+          <VCardText class="d-flex flex-column gap-6">
+            <VTextField
+              v-model="form.name"
+              label="Название"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-              <VCol cols="12">
-                <VTextField
-                  v-model.number="form.balance"
-                  label="Balance"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                />
-              </VCol>
+            <VTextField
+              v-model.number="form.balance"
+              label="Баланс"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-              <VCol cols="12">
-                <VTextField
-                  v-model="form.currency"
-                  label="Currency"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                />
-              </VCol>
-            </VRow>
+            <VTextField
+              v-model="form.currency"
+              label="Валюта"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
           </VCardText>
         </VCard>
 
         <VCard variant="flat" class="rounded-lg">
-          <VCardActions>
+          <template #actions>
             <VSpacer/>
 
             <VBtn color="primary" variant="flat" :loading="loading" @click="save">
-              Save
+              Сохранить
             </VBtn>
-          </VCardActions>
+          </template>
         </VCard>
       </VCol>
     </VRow>

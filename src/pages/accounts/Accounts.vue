@@ -85,11 +85,11 @@ export default {
       }
     },
 
-    async deleteAccount (category) {
+    async deleteAccount (account) {
       this.loading = true
 
       try {
-        await api.accounts.delete(category.id)
+        await api.accounts.delete(account.id)
 
         await this.getAccounts()
       } finally {

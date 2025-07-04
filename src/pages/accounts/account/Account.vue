@@ -1,35 +1,50 @@
 <template>
-  <VContainer v-if="category" fluid>
+  <VContainer fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>{{ category.name }}</h1>
+      <h1>Редактировать Счёт</h1>
     </div>
 
-    <div class="d-flex flex-column gap-3" style="max-width: 900px">
-      <VCard variant="flat" class="rounded-lg">
-        <VCardText>
-          <VRow>
-            <VCol cols="12">
-              <VTextField
-                v-model="form.name"
-                label="Name"
-                variant="outlined"
-                hide-details="auto"
-              />
-            </VCol>
-          </VRow>
-        </VCardText>
-      </VCard>
+    <VRow>
+      <VCol cols="12" md="4">
+        <VCard variant="flat" class="rounded-lg">
+          <VCardText class="d-flex flex-column gap-6">
+            <VTextField
+              v-model="form.name"
+              label="Название"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-      <VCard variant="flat" class="rounded-lg">
-        <VCardActions>
-          <VSpacer/>
+            <VTextField
+              v-model.number="form.balance"
+              label="Баланс"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-          <VBtn color="primary" variant="flat" :loading="loading" @click="save">
-            Save
-          </VBtn>
-        </VCardActions>
-      </VCard>
-    </div>
+            <VTextField
+              v-model="form.currency"
+              label="Валюта"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
+          </VCardText>
+        </VCard>
+
+        <VCard variant="flat" class="rounded-lg">
+          <template #actions>
+            <VSpacer/>
+
+            <VBtn color="primary" variant="flat" :loading="loading" @click="save">
+              Сохранить
+            </VBtn>
+          </template>
+        </VCard>
+      </VCol>
+    </VRow>
   </VContainer>
 </template>
 
@@ -37,36 +52,36 @@
 import api from '@/plugins/api.js'
 
 export default {
-  name: 'Category',
+  name: 'Account',
 
   props: {
-    categoryId: { type: [String, Number], required: true }
+    accountId: { type: [String, Number], required: true }
   },
 
   data: () => ({
     loading: false,
 
-    category: undefined,
-
     form: {
-      name: ''
+      name: undefined,
+      balance: 0,
+      currency: undefined
     }
   }),
 
   async created() {
-    await this.getCategory()
+    await this.getAccount()
   },
 
   methods: {
-    async getCategory() {
+    async getAccount() {
       this.loading = true
 
       try {
-        const { data } = await api.categories.getOne(this.categoryId)
-
-        this.category = data
+        const { data } = await api.accounts.getOne(this.accountId)
 
         this.form.name = data.name
+        this.form.balance = data.balance
+        this.form.currency = data.currency
       } finally {
         this.loading = false
       }
@@ -76,9 +91,9 @@ export default {
       this.loading = true
 
       try {
-        await api.categories.update(this.categoryId, this.form)
+        await api.accounts.update(this.accountId, this.form)
 
-        this.$router.push({ name: 'categories' })
+        this.$router.push({ name: 'accounts' })
       } finally {
         this.loading = false
       }

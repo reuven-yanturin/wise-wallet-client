@@ -10,7 +10,7 @@ export default {
 
     getOne: categoryId => instance.get(`categories/${categoryId}`),
 
-    update: (categoryId, body) => instance.post(`categories/${categoryId}`, body),
+    update: (categoryId, body) => instance.patch(`categories/${categoryId}`, body),
 
     delete: categoryId => instance.delete(`categories/${categoryId}`),
   },
@@ -22,7 +22,7 @@ export default {
 
     getOne: userId => instance.get(`users/${userId}`),
 
-    update: (userId, body) => instance.post(`users/${userId}`, body),
+    update: (userId, body) => instance.patch(`users/${userId}`, body),
 
     delete: userId => instance.delete(`users/${userId}`),
   },
@@ -36,7 +36,7 @@ export default {
 
     getOne: accountId => instance.get(`accounts/${accountId}`),
 
-    update: (accountId, body) => instance.post(`accounts/${accountId}`, body),
+    update: (accountId, body) => instance.patch(`accounts/${accountId}`, body),
 
     delete: accountId => instance.delete(`accounts/${accountId}`),
   },
@@ -50,7 +50,7 @@ export default {
 
     getOne: transactionId => instance.get(`transactions/${transactionId}`),
 
-    update: (transactionId, body) => instance.post(`transactions/${transactionId}`, body),
+    update: (transactionId, body) => instance.patch(`transactions/${transactionId}`, body),
 
     delete: transactionId => instance.delete(`transactions/${transactionId}`),
   },
