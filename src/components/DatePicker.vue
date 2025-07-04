@@ -46,10 +46,19 @@ export default {
       },
 
       set(value) {
-        this.$emit(
-          "update:modelValue",
-          value && this.$dayjs(value).format("YYYY-MM-DD")
-        )
+        if (!value) {
+          this.$emit("update:modelValue", undefined);
+          return
+        }
+
+        const currentTime = this.$dayjs()
+
+        const selectedDate = this.$dayjs(value)
+          .hour(currentTime.hour())
+          .minute(currentTime.minute())
+          .second(currentTime.second())
+
+        this.$emit("update:modelValue", selectedDate.format())
       },
     },
   },

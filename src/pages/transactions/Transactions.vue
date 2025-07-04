@@ -2,7 +2,7 @@
   <VContainer fluid>
     <VRow>
       <VCol cols="12">
-        <h1>Transactions</h1>
+        <h1>Транзакции</h1>
       </VCol>
 
       <VCol cols="12">
@@ -13,21 +13,21 @@
         <VMenu>
           <template #activator="{ props }">
             <VBtn color="primary" variant="flat"  v-bind="props">
-              Add New
+              Добавить
             </VBtn>
           </template>
 
           <VList>
             <VListItem :to="{ name: 'transaction-create', query: { type: 'income' } }">
-              <VListItemTitle>Income</VListItemTitle>
+              <VListItemTitle>Доход</VListItemTitle>
             </VListItem>
 
             <VListItem :to="{ name: 'transaction-create', query: { type: 'expense' }  }">
-              <VListItemTitle>Expense</VListItemTitle>
+              <VListItemTitle>Расход</VListItemTitle>
             </VListItem>
 
             <VListItem :to="{ name: 'transaction-create', query: { type: 'transfer' }  }">
-              <VListItemTitle>Transfer</VListItemTitle>
+              <VListItemTitle>Перевод</VListItemTitle>
             </VListItem>
           </VList>
         </VMenu>
@@ -57,12 +57,12 @@
               v-model:items-per-page="itemsPerPage"
               :headers="[
                 { title: 'Id', key: 'id' },
-                { title: 'Account', key: 'account'  },
-                { title: 'Category', key: 'category' },
-                { title: 'Amount', key: 'amount' },
-                { title: 'Date', key: 'date' },
-                { title: 'Type', key: 'type' },
-                { title: 'Actions', key: 'actions' },
+                { title: 'Счёт', key: 'account'  },
+                { title: 'Категория', key: 'category' },
+                { title: 'Сумма', key: 'amount' },
+                { title: 'Дата', key: 'date' },
+                { title: 'Тип', key: 'type' },
+                { title: '', key: 'actions' },
               ]"
               :items="transactions"
               :items-length="totalItems"
@@ -167,12 +167,9 @@ export default {
   watch: {
     filter: {
       deep: true,
+      immediate: true,
       handler: 'getTransactions'
     }
-  },
-
-  async created() {
-    await this.getTransactions()
   },
 
   methods: {
