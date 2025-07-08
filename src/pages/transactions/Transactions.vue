@@ -68,68 +68,67 @@
               :items-length="totalItems"
               :loading="loading"
             >
-              <template #item.account="{ item }">
-                <div class="d-flex flex-column py-2">
-                  {{ item.account.name }}
+              <template #item="{item}">
+                <tr :class="{ 'bg-grey-lighten-3 text-disabled': item.isScheduled }">
+                  <td>{{item.id}}</td>
 
-                  <template v-if="item.accountTo">
-                    <span class="ml-8">
-                      <FontAwesomeIcon icon="arrow-down"/>
-                    </span>
+                  <td>
+                    <div class="d-flex flex-column py-2">
+                      {{ item.account.name }}
 
-                    <span>{{ item.accountTo.name }}</span>
-                  </template>
-                </div>
-              </template>
+                      <template v-if="item.accountTo">
+                        <span class="ml-8">
+                          <FontAwesomeIcon icon="arrow-down"/>
+                        </span>
 
-              <template #item.category="{ item }">
-                <VListItem
-                  v-if="item.category"
-                  :title="item.category.name"
-                  :subtitle="item.note"
-                  class="pl-0"
-                />
-              </template>
+                        <span>{{ item.accountTo.name }}</span>
+                      </template>
+                    </div>
+                  </td>
 
-              <template #item.amount="{ item }">
-                <span :class="{'text-success': item.type === 'income', 'text-error': item.type === 'expense'}">
-                  {{ formatPriceMixin(item.amount) }}
-                </span>
-              </template>
+                  <td>
+                    <template v-if="item.category">
+                      {{ item.category.name }}
+                    </template>
+                  </td>
 
-              <template #item.date="{ item }">
-                {{ $dayjs(item.date).format("DD MMM, YYYY HH:mm") }}
-              </template>
+                  <td :class="{'text-success': item.type === 'income', 'text-error': item.type === 'expense'}">
+                    {{ formatPriceMixin(item.amount) }}
+                  </td>
 
-              <template #item.type="{ item }">
-                <VChip :color="{ income: 'success', expense: 'error', transfer: 'default' }[item.type]">
-                  <template #prepend>
-                    <FontAwesomeIcon v-if="item.type === 'income'" icon="arrow-trend-up" class="mr-2"/>
+                  <td>{{ $dayjs(item.date).format("DD MMM, YYYY HH:mm") }}</td>
 
-                    <FontAwesomeIcon v-if="item.type === 'expense'" icon="arrow-trend-down" class="mr-2"/>
+                  <td>
+                    <VChip :color="{ income: 'success', expense: 'error', transfer: 'default' }[item.type]">
+                      <template #prepend>
+                        <FontAwesomeIcon v-if="item.type === 'income'" icon="arrow-trend-up" class="mr-2"/>
 
-                    <FontAwesomeIcon v-if="item.type === 'transfer'" icon="arrow-right-arrow-left" class="mr-2"/>
-                  </template>
+                        <FontAwesomeIcon v-if="item.type === 'expense'" icon="arrow-trend-down" class="mr-2"/>
 
-                  {{ item.type }}
-                </VChip>
-              </template>
+                        <FontAwesomeIcon v-if="item.type === 'transfer'" icon="arrow-right-arrow-left" class="mr-2"/>
+                      </template>
 
-              <template #item.actions="{ item }">
-                <VMenu>
-                  <template #activator="{props}">
-                    <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
-                  </template>
+                      {{ item.type }}
+                    </VChip>
+                  </td>
 
-                  <VList>
-                    <VListItem
-                      title="Show"
-                      :to="{ name: 'transaction', params: { transactionId: item.id } }"
-                    />
+                  <td>
+                    <VMenu>
+                      <template #activator="{ props }">
+                        <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
+                      </template>
 
-                    <VListItem title="Delete" @click="deleteTransaction(item)" />
-                  </VList>
-                </VMenu>
+                      <VList>
+                        <VListItem
+                          title="Show"
+                          :to="{ name: 'transaction', params: { transactionId: item.id } }"
+                        />
+
+                        <VListItem title="Delete" @click="deleteTransaction(item)" />
+                      </VList>
+                    </VMenu>
+                  </td>
+                </tr>
               </template>
             </VDataTableServer>
           </VCardText>
