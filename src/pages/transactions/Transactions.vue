@@ -116,17 +116,20 @@
               </template>
 
               <template #item.actions="{ item }">
-                <div class="d-flex">
-                  <span v-if="item.isDeleted">deleted</span>
-
-                  <template v-else>
-                    <VBtn :to="{ name: 'transaction', params: { transactionId: item.id } }">
-                      Show
-                    </VBtn>
-
-                    <VBtn @click="deleteTransaction(item)">delete</VBtn>
+                <VMenu>
+                  <template #activator="{props}">
+                    <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
                   </template>
-                </div>
+
+                  <VList>
+                    <VListItem
+                      title="Show"
+                      :to="{ name: 'transaction', params: { transactionId: item.id } }"
+                    />
+
+                    <VListItem title="Delete" @click="deleteTransaction(item)" />
+                  </VList>
+                </VMenu>
               </template>
             </VDataTableServer>
           </VCardText>

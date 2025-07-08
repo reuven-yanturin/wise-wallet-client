@@ -7,109 +7,93 @@
     <VRow>
       <VCol cols="12" md="4">
         <VCard variant="flat" class="rounded-lg">
-          <VCardText>
-            <VRow>
-              <VCol cols="12">
-                <VAutocomplete
-                  v-model="form.type"
-                  :items="[
-                    { title: 'Income', value: 'income' },
-                    { title: 'Expense', value: 'expense' },
-                    { title: 'Transfer', value: 'transfer' },
-                  ]"
-                  label="Type"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                />
-              </VCol>
+          <VCardText class="d-flex flex-column gap-6">
+            <VAutocomplete
+              v-model="form.type"
+              :items="[
+                { title: 'Income', value: 'income' },
+                { title: 'Expense', value: 'expense' },
+                { title: 'Transfer', value: 'transfer' },
+              ]"
+              label="Type"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-              <VCol cols="12">
-                <VTextField
-                  v-model.number="form.amount"
-                  label="Amount"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                />
-              </VCol>
+            <VTextField
+              v-model.number="form.amount"
+              label="Amount"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-              <VCol cols="12">
-                <VTextField
-                  v-model="form.currency"
-                  label="Currency"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                  readonly
-                />
-              </VCol>
+            <VTextField
+              v-model="form.currency"
+              label="Currency"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+              readonly
+            />
 
-              <VCol cols="12">
-                <DatePicker v-model="form.date" label="Date" />
-              </VCol>
+            <DatePicker v-model="form.date" label="Date" />
 
-              <VCol v-if="form.type !== 'transfer'" cols="12">
-                <VAutocomplete
-                  v-model="form.categoryId"
-                  :items="categories"
-                  label="Category"
-                  item-value="id"
-                  item-title="name"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                />
-              </VCol>
+            <VAutocomplete
+              v-if="form.type !== 'transfer'"
+              v-model="form.categoryId"
+              :items="categories"
+              label="Category"
+              item-value="id"
+              item-title="name"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-              <VCol cols="12">
-                <VAutocomplete
-                  v-model="form.accountId"
-                  :items="accounts"
-                  label="Account"
-                  item-value="id"
-                  item-title="name"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                />
-              </VCol>
+            <VAutocomplete
+              v-model="form.accountId"
+              :items="accounts"
+              label="Account"
+              item-value="id"
+              item-title="name"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-              <VCol v-if="form.type === 'transfer'" cols="12">
-                <VAutocomplete
-                  v-model="form.accountToId"
-                  :items="accounts"
-                  label="Account To"
-                  item-value="id"
-                  item-title="name"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                />
-              </VCol>
+            <VAutocomplete
+              v-if="form.type === 'transfer'"
+              v-model="form.accountToId"
+              :items="accounts"
+              label="Account To"
+              item-value="id"
+              item-title="name"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
 
-              <VCol cols="12">
-                <VTextarea
-                  v-model="form.note"
-                  label="Note"
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                  rows="3"
-                />
-              </VCol>
-            </VRow>
+            <VTextarea
+              v-model="form.note"
+              label="Note"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+              rows="3"
+            />
           </VCardText>
         </VCard>
 
         <VCard variant="flat" class="rounded-lg">
-          <VCardActions>
+          <template #actions>
             <VSpacer/>
 
             <VBtn color="primary" variant="flat" :loading="loading" @click="save">
               Save
             </VBtn>
-          </VCardActions>
+          </template>
         </VCard>
       </VCol>
     </VRow>
@@ -118,12 +102,14 @@
 
 <script>
 import api from '@/plugins/api.js'
-import { ca } from "vuetify/locale"
 import DatePicker from "@/components/DatePicker.vue"
 
 export default {
   name: 'TransactionCreate',
-  components: { DatePicker },
+
+  components: {
+    DatePicker
+  },
 
   data: ({ $route: { query } }) => ({
     loading: false,

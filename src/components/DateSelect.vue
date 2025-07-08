@@ -77,12 +77,12 @@ export default {
 
     getEndDate(value) {
       return {
-        week: this.$dayjs().endOf('day').format(),
+        week: this.$dayjs().endOf('week').format(),
         lastWeek: this.$dayjs().add(-1, 'weeks').endOf('week').format(),
-        month: this.$dayjs().endOf('day').format(),
+        month: this.$dayjs().endOf('month').format(),
         lastMonth: this.$dayjs().add(-1, 'months').endOf('month').format(),
         last3Months: this.$dayjs().add(-1, 'months').endOf('month').format(),
-        year: this.$dayjs().endOf('day').format(),
+        year: this.$dayjs().endOf('year').format(),
         lastYear: this.$dayjs().add(-1, 'years').endOf('year').format(),
         exact: "exact"
       }[value]
