@@ -13,17 +13,20 @@
             </template>
 
             <VList>
-              <VListItem :to="{ name: 'transaction-create', query: { type: 'income', accountId: account.id } }">
-                <VListItemTitle>Income</VListItemTitle>
-              </VListItem>
+              <VListItem
+                title="Income"
+                :to="{ name: 'transaction-create', query: { type: 'income', accountId: account.id } }"
+              />
 
-              <VListItem :to="{ name: 'transaction-create', query: { type: 'expense', accountId: account.id }  }">
-                <VListItemTitle>Expense</VListItemTitle>
-              </VListItem>
+              <VListItem
+                title="Expense"
+                :to="{ name: 'transaction-create', query: { type: 'expense', accountId: account.id } }"
+              />
 
-              <VListItem :to="{ name: 'transaction-create', query: { type: 'transfer', accountId: account.id }  }">
-                <VListItemTitle>Transfer</VListItemTitle>
-              </VListItem>
+              <VListItem
+                title="Transfer"
+                :to="{ name: 'transaction-create', query: { type: 'transfer', accountId: account.id } }"
+              />
             </VList>
           </VMenu>
         </VCardTitle>
