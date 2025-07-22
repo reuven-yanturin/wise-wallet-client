@@ -22,17 +22,24 @@
           :loading="loading"
         >
           <template #item.actions="{ item }">
-            <div class="d-flex">
-              <span v-if="item.isDeleted">deleted</span>
+            <span v-if="item.isDeleted" class="text-error">
+              deleted
+            </span>
 
-              <template v-else>
-                <VBtn :to="{ name: 'category', params: { categoryId: item.id } }">
-                  Show
-                </VBtn>
-
-                <VBtn @click="deleteCategory(item)">delete</VBtn>
+            <VMenu v-else>
+              <template #activator="{ props }">
+                <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
               </template>
-            </div>
+
+              <VList>
+                <VListItem
+                  title="Show"
+                  :to="{ name: 'category', params: { categoryId: item.id } }"
+                />
+
+                <VListItem title="Delete" @click="deleteCategory(item)" />
+              </VList>
+            </VMenu>
           </template>
         </VDataTableServer>
       </VCardText>
