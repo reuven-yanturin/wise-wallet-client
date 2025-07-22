@@ -1,49 +1,55 @@
 <template>
   <VContainer fluid>
-    <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Categories</h1>
+    <VRow>
+      <VCol cols="12">
+        <h1>Категории</h1>
+      </VCol>
 
-      <VBtn color="primary" variant="flat" :to="{ name: 'category-create' }">
-        Add New
-      </VBtn>
-    </div>
+      <VCol cols="12">
+        <VBtn color="primary" variant="flat" :to="{ name: 'category-create' }">
+          Добавить
+        </VBtn>
+      </VCol>
 
-    <VCard variant="flat" class="rounded-lg">
-      <VCardText>
-        <VDataTableServer
-          v-model:items-per-page="itemsPerPage"
-          :headers="[
-            { title: 'Id', key: 'id' },
-            { title: 'Category', key: 'name' },
-            { title: 'Actions', key: 'actions' },
-          ]"
-          :items="categories"
-          :items-length="totalItems"
-          :loading="loading"
-        >
-          <template #item.actions="{ item }">
-            <span v-if="item.isDeleted" class="text-error">
-              deleted
-            </span>
+      <VCol cols="12">
+        <VCard variant="flat" class="rounded-lg">
+          <VCardText>
+            <VDataTableServer
+              v-model:items-per-page="itemsPerPage"
+              :headers="[
+                { title: 'Id', key: 'id' },
+                { title: 'Category', key: 'name' },
+                { title: 'Actions', key: 'actions' },
+              ]"
+              :items="categories"
+              :items-length="totalItems"
+              :loading="loading"
+            >
+              <template #item.actions="{ item }">
+                <span v-if="item.isDeleted" class="text-error">
+                  deleted
+                </span>
 
-            <VMenu v-else>
-              <template #activator="{ props }">
-                <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
+                <VMenu v-else>
+                  <template #activator="{ props }">
+                    <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
+                  </template>
+
+                  <VList>
+                    <VListItem
+                      title="Show"
+                      :to="{ name: 'category', params: { categoryId: item.id } }"
+                    />
+
+                    <VListItem title="Delete" @click="deleteCategory(item)" />
+                  </VList>
+                </VMenu>
               </template>
-
-              <VList>
-                <VListItem
-                  title="Show"
-                  :to="{ name: 'category', params: { categoryId: item.id } }"
-                />
-
-                <VListItem title="Delete" @click="deleteCategory(item)" />
-              </VList>
-            </VMenu>
-          </template>
-        </VDataTableServer>
-      </VCardText>
-    </VCard>
+            </VDataTableServer>
+          </VCardText>
+        </VCard>
+      </VCol>
+    </VRow>
   </VContainer>
 </template>
 
