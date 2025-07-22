@@ -24,7 +24,14 @@
           :loading="loading"
         >
           <template #item.balance="{ item }">
-            {{ formatPriceMixin(item.balance) }}
+            <span
+              :class="{
+                'text-error': item.balance.amount < 0,
+                'text-success': item.balance.amount > 0
+              }"
+            >
+              {{ formatPriceMixin(item.balance) }}
+            </span>
           </template>
 
           <template #item.createdAt="{ item }">
@@ -32,17 +39,24 @@
           </template>
 
           <template #item.actions="{ item }">
-            <div class="d-flex">
-              <span v-if="item.isDeleted">deleted</span>
+            <span v-if="item.isDeleted" class="text-error">
+              deleted
+            </span>
 
-              <template v-else>
-                <VBtn :to="{ name: 'account', params: { accountId: item.id } }">
-                  Show
-                </VBtn>
-
-                <VBtn @click="deleteAccount(item)">delete</VBtn>
+            <VMenu v-else>
+              <template #activator="{ props }">
+                <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
               </template>
-            </div>
+
+              <VList>
+                <VListItem
+                  title="Show"
+                  :to="{ name: 'account', params: { accountId: item.id } }"
+                />
+
+                <VListItem title="Delete" @click="deleteAccount(item)" />
+              </VList>
+            </VMenu>
           </template>
         </VDataTableServer>
       </VCardText>
