@@ -1,66 +1,72 @@
 <template>
   <VContainer fluid>
-    <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Accounts</h1>
+    <VRow>
+      <VCol cols="12">
+        <h1>Accounts</h1>
+      </VCol>
 
-      <VBtn color="primary" variant="flat" :to="{ name: 'account-create' }">
-        Add New
-      </VBtn>
-    </div>
+      <VCol cols="12">
+        <VBtn color="primary" variant="flat" :to="{ name: 'account-create' }">
+          Добавить
+        </VBtn>
+      </VCol>
 
-    <VCard variant="flat" class="rounded-lg">
-      <VCardText>
-        <VDataTableServer
-          v-model:items-per-page="itemsPerPage"
-          :headers="[
-            { title: 'Id', key: 'id' },
-            { title: 'Account', key: 'name'  },
-            { title: 'Balance', key: 'balance' },
-            { title: 'Created at', key: 'createdAt' },
-            { title: 'Actions', key: 'actions' },
-          ]"
-          :items="accounts"
-          :items-length="totalItems"
-          :loading="loading"
-        >
-          <template #item.balance="{ item }">
-            <span
-              :class="{
-                'text-error': item.balance.amount < 0,
-                'text-success': item.balance.amount > 0
-              }"
+      <VCol cols="12">
+        <VCard variant="flat" class="rounded-lg">
+          <VCardText>
+            <VDataTableServer
+              v-model:items-per-page="itemsPerPage"
+              :headers="[
+                { title: 'Id', key: 'id' },
+                { title: 'Account', key: 'name'  },
+                { title: 'Balance', key: 'balance' },
+                { title: 'Created at', key: 'createdAt' },
+                { title: 'Actions', key: 'actions' },
+              ]"
+              :items="accounts"
+              :items-length="totalItems"
+              :loading="loading"
             >
-              {{ formatPriceMixin(item.balance) }}
-            </span>
-          </template>
-
-          <template #item.createdAt="{ item }">
-            {{ $dayjs(item.createdAt).format("DD MMM, YYYY") }}
-          </template>
-
-          <template #item.actions="{ item }">
-            <span v-if="item.isDeleted" class="text-error">
-              deleted
-            </span>
-
-            <VMenu v-else>
-              <template #activator="{ props }">
-                <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
+              <template #item.balance="{ item }">
+                <span
+                  :class="{
+                    'text-error': item.balance.amount < 0,
+                    'text-success': item.balance.amount > 0
+                  }"
+                >
+                  {{ formatPriceMixin(item.balance) }}
+                </span>
               </template>
 
-              <VList>
-                <VListItem
-                  title="Show"
-                  :to="{ name: 'account', params: { accountId: item.id } }"
-                />
+              <template #item.createdAt="{ item }">
+                {{ $dayjs(item.createdAt).format("DD MMM, YYYY") }}
+              </template>
 
-                <VListItem title="Delete" @click="deleteAccount(item)" />
-              </VList>
-            </VMenu>
-          </template>
-        </VDataTableServer>
-      </VCardText>
-    </VCard>
+              <template #item.actions="{ item }">
+                <span v-if="item.isDeleted" class="text-error">
+                  deleted
+                </span>
+
+                <VMenu v-else>
+                  <template #activator="{ props }">
+                    <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
+                  </template>
+
+                  <VList>
+                    <VListItem
+                      title="Show"
+                      :to="{ name: 'account', params: { accountId: item.id } }"
+                    />
+
+                    <VListItem title="Delete" @click="deleteAccount(item)" />
+                  </VList>
+                </VMenu>
+              </template>
+            </VDataTableServer>
+          </VCardText>
+        </VCard>
+      </VCol>
+    </VRow>
   </VContainer>
 </template>
 
