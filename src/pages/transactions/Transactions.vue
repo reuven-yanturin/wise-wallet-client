@@ -36,18 +36,12 @@
       </VCol>
 
       <VCol cols="12">
-        <VCard variant="flat" rounded="lg">
-          <VCardText>
-            <VRow>
-              <VCol cols="12" md="3">
-                <DateSelect
-                  v-model:start-date="filter.startDate"
-                  v-model:end-date="filter.endDate"
-                />
-              </VCol>
-            </VRow>
-          </VCardText>
-        </VCard>
+        <TransactionsFilter
+          v-model:start-date="filter.startDate"
+          v-model:end-date="filter.endDate"
+          v-model:account="filter.account"
+          v-model:category="filter.category"
+        />
       </VCol>
 
       <VCol cols="12">
@@ -143,11 +137,13 @@ import api from '@/plugins/api.js'
 import AccountsWidget from "@/components/AccountsWidget.vue"
 import UploadTransactions from "@/pages/transactions/UploadTransactions.vue"
 import DateSelect from "@/components/DateSelect.vue"
+import TransactionsFilter from "@/pages/transactions/TransactionsFilter.vue"
 
 export default {
   name: 'Transactions',
 
   components: {
+    TransactionsFilter,
     DateSelect,
     UploadTransactions,
     AccountsWidget
@@ -160,6 +156,8 @@ export default {
     filter: {
       startDate: undefined,
       endDate: undefined,
+      account: undefined,
+      category: undefined,
     },
 
     transactions: [],

@@ -3,8 +3,8 @@
     v-model="selectDate"
     :items="dates"
     label="Дата"
-    filled
-    dense
+    variant="outlined"
+    density="compact"
     hide-details="auto"
     :menu-props="{ offsetY: true, contentClass: 'select-menu', nudgeBottom: 8 }"
   />

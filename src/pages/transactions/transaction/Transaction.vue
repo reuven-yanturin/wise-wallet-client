@@ -40,16 +40,9 @@
 
             <DatePicker v-model="form.date" label="Date" />
 
-            <VAutocomplete
+            <CategoriesAutocomplete
               v-if="form.type !== 'transfer'"
               v-model="form.categoryId"
-              :items="categories"
-              label="Category"
-              item-value="id"
-              item-title="name"
-              variant="outlined"
-              density="compact"
-              hide-details="auto"
             />
 
             <VAutocomplete
@@ -103,11 +96,13 @@
 <script>
 import api from '@/plugins/api.js'
 import DatePicker from "@/components/DatePicker.vue"
+import CategoriesAutocomplete from "@/components/CategoriesAutocomplete.vue"
 
 export default {
   name: 'Transaction',
 
   components: {
+    CategoriesAutocomplete,
     DatePicker
   },
 
@@ -118,7 +113,6 @@ export default {
   data: () => ({
     loading: false,
 
-    categories: [],
     accounts: [],
 
     transaction: undefined,
@@ -136,24 +130,11 @@ export default {
   }),
 
   async created() {
-    await this.fetchCategories()
     await this.fetchAccount()
     await this.getTransaction()
   },
 
   methods: {
-    async fetchCategories () {
-      this.loading = true
-
-      try {
-        const { data } = await api.categories.getList()
-
-        this.categories = data
-      } finally {
-        this.loading = false
-      }
-    },
-
     async fetchAccount () {
       this.loading = true
 
