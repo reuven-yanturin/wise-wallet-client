@@ -8,18 +8,7 @@
       <VCol cols="12" md="4">
         <VCard variant="flat" class="rounded-lg">
           <VCardText class="d-flex flex-column gap-6">
-            <VAutocomplete
-              v-model="form.type"
-              :items="[
-                { title: 'Income', value: 'income' },
-                { title: 'Expense', value: 'expense' },
-                { title: 'Transfer', value: 'transfer' },
-              ]"
-              label="Type"
-              variant="outlined"
-              density="compact"
-              hide-details="auto"
-            />
+            <TransactionTypesSelect v-model="form.type" />
 
             <VTextField
               v-model.number="form.amount"
@@ -45,7 +34,7 @@
               v-model="form.categoryId"
             />
 
-            <AccountsAutocomplete  v-model="form.accountId" />
+            <AccountsAutocomplete v-model="form.accountId" />
 
             <AccountsAutocomplete
               v-if="form.type === 'transfer'"
@@ -83,11 +72,13 @@ import api from '@/plugins/api.js'
 import DatePicker from "@/components/DatePicker.vue"
 import CategoriesAutocomplete from "@/components/CategoriesAutocomplete.vue"
 import AccountsAutocomplete from "@/components/AccountsAutocomplete.vue"
+import TransactionTypesSelect from "@/components/TransactionTypesSelect.vue"
 
 export default {
   name: 'Transaction',
 
   components: {
+    TransactionTypesSelect,
     AccountsAutocomplete,
     CategoriesAutocomplete,
     DatePicker

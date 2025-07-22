@@ -41,6 +41,7 @@
           v-model:end-date="filter.endDate"
           v-model:account="filter.account"
           v-model:category="filter.category"
+          v-model:type="filter.type"
         />
       </VCol>
 
@@ -158,6 +159,7 @@ export default {
       endDate: undefined,
       account: undefined,
       category: undefined,
+      type: undefined,
     },
 
     transactions: [],
