@@ -25,11 +25,17 @@
           />
         </VCol>
 
-        <VCol cols="12" md="3">
+        <VCol cols="12" md="2">
           <TransactionTypesSelect
             :model-value="type"
             @update:model-value="$emit('update:type', $event)"
           />
+        </VCol>
+
+        <VCol cols="12" md="1">
+          <VBtn variant="text" color="primary" @click="clearFilter">
+            Clear
+          </VBtn>
         </VCol>
       </VRow>
     </VCardText>
@@ -57,5 +63,13 @@ export default {
     category: { type: Number, default: undefined },
     type: { type: String, default: undefined },
   },
+
+  methods: {
+    clearFilter () {
+      this.$emit('update:account', undefined)
+      this.$emit('update:category', undefined)
+      this.$emit('update:type', undefined)
+    }
+  }
 }
 </script>
