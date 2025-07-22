@@ -45,27 +45,12 @@
               v-model="form.categoryId"
             />
 
-            <VAutocomplete
-              v-model="form.accountId"
-              :items="accounts"
-              label="Account"
-              item-value="id"
-              item-title="name"
-              variant="outlined"
-              density="compact"
-              hide-details="auto"
-            />
+            <AccountsAutocomplete  v-model="form.accountId" />
 
-            <VAutocomplete
+            <AccountsAutocomplete
               v-if="form.type === 'transfer'"
               v-model="form.accountToId"
-              :items="accounts"
               label="Account To"
-              item-value="id"
-              item-title="name"
-              variant="outlined"
-              density="compact"
-              hide-details="auto"
             />
 
             <VTextarea
@@ -97,11 +82,13 @@
 import api from '@/plugins/api.js'
 import DatePicker from "@/components/DatePicker.vue"
 import CategoriesAutocomplete from "@/components/CategoriesAutocomplete.vue"
+import AccountsAutocomplete from "@/components/AccountsAutocomplete.vue"
 
 export default {
   name: 'Transaction',
 
   components: {
+    AccountsAutocomplete,
     CategoriesAutocomplete,
     DatePicker
   },
@@ -112,8 +99,6 @@ export default {
 
   data: () => ({
     loading: false,
-
-    accounts: [],
 
     transaction: undefined,
 
@@ -130,23 +115,10 @@ export default {
   }),
 
   async created() {
-    await this.fetchAccount()
     await this.getTransaction()
   },
 
   methods: {
-    async fetchAccount () {
-      this.loading = true
-
-      try {
-        const { data } = await api.accounts.getList()
-
-        this.accounts = data
-      } finally {
-        this.loading = false
-      }
-    },
-
     async getTransaction() {
       this.loading = true
 
