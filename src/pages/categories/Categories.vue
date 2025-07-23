@@ -12,6 +12,12 @@
       </VCol>
 
       <VCol cols="12">
+        <CategoriesFilter
+          v-model:category="filter.category"
+        />
+      </VCol>
+
+      <VCol cols="12">
         <VCard variant="flat" class="rounded-lg">
           <VCardText>
             <VDataTableServer
@@ -55,16 +61,33 @@
 
 <script>
 import api from '@/plugins/api.js'
+import CategoriesFilter from "./CategoriesFilter.vue"
 
 export default {
   name: 'Categories',
+
+  components: {
+    CategoriesFilter
+  },
 
   data: () => ({
     loading: false,
     itemsPerPage: 50,
     categories: [],
-    totalItems: 0
+    totalItems: 0,
+
+    filter: {
+      category: undefined,
+    },
   }),
+
+  watch: {
+    filter: {
+      deep: true,
+      immediate: true,
+      handler: 'getCategories'
+    }
+  },
 
   async created() {
     await this.getCategories()
@@ -77,7 +100,8 @@ export default {
       try {
         const { data } = await api.categories.getAll({
           skip: 0,
-          take: this.itemsPerPage
+          take: this.itemsPerPage,
+          ...this.filter
         })
 
         this.categories = data.categories

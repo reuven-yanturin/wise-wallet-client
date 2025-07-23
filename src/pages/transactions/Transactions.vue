@@ -136,16 +136,14 @@
 <script>
 import api from '@/plugins/api.js'
 import AccountsWidget from "@/components/AccountsWidget.vue"
-import UploadTransactions from "@/pages/transactions/UploadTransactions.vue"
-import DateSelect from "@/components/DateSelect.vue"
-import TransactionsFilter from "@/pages/transactions/TransactionsFilter.vue"
+import UploadTransactions from "./UploadTransactions.vue"
+import TransactionsFilter from "./TransactionsFilter.vue"
 
 export default {
   name: 'Transactions',
 
   components: {
     TransactionsFilter,
-    DateSelect,
     UploadTransactions,
     AccountsWidget
   },
