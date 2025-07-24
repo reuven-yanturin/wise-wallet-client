@@ -38,12 +38,20 @@
       <VMain style="background-color: #f4f6f9;">
         <RouterView />
       </VMain>
+
+      <Toast />
     </VLayout>
   </VApp>
 </template>
 
 <script>
+import Toast from "@/components/Toast.vue"
+
 export default {
+  components: {
+    Toast
+  },
+
   data: () => ({
     drawer: true
   })

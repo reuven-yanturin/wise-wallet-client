@@ -6,23 +6,28 @@
 
 // Components
 import App from './App.vue'
-import router from "./router"
-import dayjsPlugin from "./plugins/dayjs"
-import FontAwesomeIcon from './plugins/fontawesome'
-import formatPriceMixin from './mixins/formatPriceMixin.js'
+import router from "@/router"
+import dayjsPlugin from "@/plugins/dayjs"
+import FontAwesomeIcon from '@/plugins/fontawesome'
+import vuetify from "@/plugins/vuetify"
+
+import formatPriceMixin from '@/mixins/formatPriceMixin.js'
+import toastMixin from "@/mixins/toastMixin.js"
+import store from '@/store'
 
 // Composables
 import { createApp } from 'vue'
-import vuetify from "@/plugins/vuetify"
 
 import "@/assets/styles/app.scss"
 
 const app = createApp(App)
 
 app
+  .use(store)
   .use(vuetify)
   .use(router)
   .use(dayjsPlugin)
   .mixin(formatPriceMixin)
+  .mixin(toastMixin)
   .component('FontAwesomeIcon', FontAwesomeIcon)
   .mount('#app')

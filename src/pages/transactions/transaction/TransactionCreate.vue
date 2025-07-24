@@ -42,6 +42,23 @@
               label="Account To"
             />
 
+            <VCheckbox v-model="isRecurring" label="Повторять?" />
+
+            <VSelect
+              v-if="isRecurring"
+              v-model="form.periodUnit"
+              :items="[
+                { title: 'Day', value: 'day' },
+                { title: 'Week', value: 'week' },
+                { title: 'Month', value: 'month' },
+                { title: 'Year', value: 'year' }
+              ]"
+              label="Period Unit"
+              variant="outlined"
+              density="compact"
+              hide-details="auto"
+            />
+
             <VTextarea
               v-model="form.note"
               label="Note"
@@ -73,6 +90,7 @@ import DatePicker from "@/components/DatePicker.vue"
 import CategoriesAutocomplete from "@/components/CategoriesAutocomplete.vue"
 import AccountsAutocomplete from "@/components/AccountsAutocomplete.vue"
 import TransactionTypesSelect from "@/components/TransactionTypesSelect.vue"
+import axios from "axios"
 
 export default {
   name: 'TransactionCreate',
@@ -87,10 +105,13 @@ export default {
   data: ({ $route: { query } }) => ({
     loading: false,
 
+    isRecurring: false,
+
     form: {
       type: query.type || undefined,
       amount: 0,
       currency: 'ILS',
+      periodUnit: undefined,
       date: undefined,
       categoryId: undefined,
       accountId: query.accountId ? Number(query.accountId) : undefined,
@@ -127,6 +148,12 @@ export default {
         await api.transactions.create(this.form)
 
         this.$router.push({ name: 'transactions' })
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response.status === 409) {
+          this.$toast("error", "Транзакция уже существует!")
+        }
+
+        throw error
       } finally {
         this.loading = false
       }
