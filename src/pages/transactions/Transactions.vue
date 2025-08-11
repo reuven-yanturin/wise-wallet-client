@@ -1,31 +1,31 @@
 <template>
-  <VCol cols="12" class="d-flex gap-4">
-    <VMenu>
-      <template #activator="{ props }">
-        <VBtn color="primary" variant="flat"  v-bind="props">
-          Добавить
-        </VBtn>
-      </template>
+  <div class="d-flex flex-column gap-6 pb-16">
+    <div class="d-flex gap-4">
+      <VMenu>
+        <template #activator="{ props }">
+          <VBtn color="primary" variant="flat"  v-bind="props">
+            Добавить
+          </VBtn>
+        </template>
 
-      <VList>
-        <VListItem :to="{ name: 'transaction-create', query: { type: 'income' } }">
-          <VListItemTitle>Доход</VListItemTitle>
-        </VListItem>
+        <VList>
+          <VListItem :to="{ name: 'transaction-create', query: { type: 'income' } }">
+            <VListItemTitle>Доход</VListItemTitle>
+          </VListItem>
 
-        <VListItem :to="{ name: 'transaction-create', query: { type: 'expense' }  }">
-          <VListItemTitle>Расход</VListItemTitle>
-        </VListItem>
+          <VListItem :to="{ name: 'transaction-create', query: { type: 'expense' }  }">
+            <VListItemTitle>Расход</VListItemTitle>
+          </VListItem>
 
-        <VListItem :to="{ name: 'transaction-create', query: { type: 'transfer' }  }">
-          <VListItemTitle>Перевод</VListItemTitle>
-        </VListItem>
-      </VList>
-    </VMenu>
+          <VListItem :to="{ name: 'transaction-create', query: { type: 'transfer' }  }">
+            <VListItemTitle>Перевод</VListItemTitle>
+          </VListItem>
+        </VList>
+      </VMenu>
 
-    <UploadTransactions @success="getTransactions"/>
-  </VCol>
+      <UploadTransactions @success="getTransactions"/>
+    </div>
 
-  <VCol cols="12">
     <TransactionsFilter
       v-model:start-date="filter.startDate"
       v-model:end-date="filter.endDate"
@@ -33,22 +33,20 @@
       v-model:category="filter.category"
       v-model:type="filter.type"
     />
-  </VCol>
 
-  <VCol cols="12">
     <VCard variant="flat" rounded="lg">
       <VCardText>
         <VDataTableServer
           v-model:items-per-page="itemsPerPage"
           :headers="[
-                { title: 'Id', key: 'id' },
-                { title: 'Счёт', key: 'account'  },
-                { title: 'Категория', key: 'category' },
-                { title: 'Сумма', key: 'amount' },
-                { title: 'Дата', key: 'date' },
-                { title: 'Тип', key: 'type' },
-                { title: '', key: 'actions' },
-              ]"
+            { title: 'Id', key: 'id' },
+            { title: 'Счёт', key: 'account'  },
+            { title: 'Категория', key: 'category' },
+            { title: 'Сумма', key: 'amount' },
+            { title: 'Дата', key: 'date' },
+            { title: 'Тип', key: 'type' },
+            { title: '', key: 'actions' },
+          ]"
           :items="transactions"
           :items-length="totalItems"
           :loading="loading"
@@ -118,7 +116,7 @@
         </VDataTableServer>
       </VCardText>
     </VCard>
-  </VCol>
+  </div>
 </template>
 
 <script>

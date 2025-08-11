@@ -10,7 +10,7 @@
       </VCol>
 
       <VCol cols="12">
-        <VTabs color="primary" bg-color="white" class="mb-6">
+        <VTabs color="primary" bg-color="white">
           <VTab :to="{ name: 'transactions' }" exact>
             Главная
           </VTab>
@@ -21,7 +21,9 @@
         </VTabs>
       </VCol>
 
-      <RouterView />
+      <VCol cols="12">
+        <RouterView />
+      </VCol>
     </VRow>
   </VContainer>
 </template>
