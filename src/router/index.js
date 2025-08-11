@@ -56,9 +56,20 @@ const routes = [
   },
 
   {
-    name: "transactions",
     path: "/transactions",
-    component: () => import("@/pages/transactions/Transactions.vue"),
+    component: () => import("@/pages/transactions/TransactionsRoot.vue"),
+    children: [
+      {
+        name: "transactions",
+        path: "/",
+        component: () => import("@/pages/transactions/Transactions.vue"),
+      },
+      {
+        name: "transactions-recurring",
+        path: "recurring",
+        component: () => import("@/pages/transactions/TransactionsRecurring.vue"),
+      }
+    ]
   },
   {
     name: "transaction-create",
