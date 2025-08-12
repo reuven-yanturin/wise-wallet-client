@@ -60,9 +60,9 @@
                   {{ item.account.name }}
 
                   <template v-if="item.accountTo">
-                        <span class="ml-8">
-                          <FontAwesomeIcon icon="arrow-down"/>
-                        </span>
+                    <span class="ml-8">
+                      <FontAwesomeIcon icon="arrow-down"/>
+                    </span>
 
                     <span>{{ item.accountTo.name }}</span>
                   </template>

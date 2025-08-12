@@ -48,10 +48,14 @@ export default {
 
     getAll: params => instance.get('transactions', { params }),
 
+    getRecurringTransactions: params => instance.get('transactions/recurring', { params }),
+
     getOne: transactionId => instance.get(`transactions/${transactionId}`),
 
     update: (transactionId, body) => instance.patch(`transactions/${transactionId}`, body),
 
     delete: transactionId => instance.delete(`transactions/${transactionId}`),
+
+    getStatistics: (type) => instance.get(`transactions/statistics/${type}`),
   },
 }
