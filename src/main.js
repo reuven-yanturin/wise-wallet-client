@@ -15,7 +15,7 @@ import formatPriceMixin from '@/mixins/formatPriceMixin.js'
 import toastMixin from "@/mixins/toastMixin.js"
 import store from '@/store'
 
-// Composables
+// Composable
 import { createApp } from 'vue'
 
 import "@/assets/styles/app.scss"

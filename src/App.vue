@@ -11,21 +11,15 @@
         @update:model-value="(val) => console.log(val)"
       >
         <VList density="compact" nav>
-          <VListItem :to="{ name: 'transactions' }" exact>
-            Transactions
-          </VListItem>
+          <VListItem :to="{ name: 'dashboard' }" title="Dashboard" exact />
 
-          <VListItem :to="{ name: 'categories' }" exact>
-            Categories
-          </VListItem>
+          <VListItem :to="{ name: 'transactions' }" title="Transactions" />
 
-          <VListItem :to="{ name: 'accounts' }" exact>
-            Accounts
-          </VListItem>
+          <VListItem :to="{ name: 'categories' }" title="Categories" exact />
 
-          <VListItem :to="{ name: 'users' }" exact>
-            Users
-          </VListItem>
+          <VListItem :to="{ name: 'accounts' }" title="Accounts" exact />
+
+          <VListItem :to="{ name: 'users' }" title="Users" exact />
         </VList>
       </VNavigationDrawer>
 
@@ -46,9 +40,11 @@
 
 <script>
 import Toast from "@/components/Toast.vue"
+import DashBoard from "@/pages/DashBoard.vue"
 
 export default {
   components: {
+    DashBoard,
     Toast
   },
 
