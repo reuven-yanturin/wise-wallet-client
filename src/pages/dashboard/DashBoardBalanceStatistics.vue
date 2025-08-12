@@ -83,15 +83,15 @@ export default {
   },
 
   async created() {
-    await this.getAllIncomes()
+    await this.getBalanceStatistics()
   },
 
   methods: {
-    async getAllIncomes () {
+    async getBalanceStatistics () {
       this.loading = true
 
       try {
-        const { data } = await api.transactions.getStatistics()
+        const { data } = await api.transactions.getBalanceStatistics()
 
         const seriesMap = new Map()
 

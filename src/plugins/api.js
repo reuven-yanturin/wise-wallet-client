@@ -48,7 +48,7 @@ export default {
 
     getAll: params => instance.get('transactions', { params }),
 
-    getStatistics: () => instance.get('transactions/statistics'),
+    getBalanceStatistics: () => instance.get('transactions/balance/statistics'),
 
     getRecurringTransactions: params => instance.get('transactions/recurring', { params }),
 
