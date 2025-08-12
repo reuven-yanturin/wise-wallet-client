@@ -40,11 +40,9 @@
 
 <script>
 import Toast from "@/components/Toast.vue"
-import DashBoard from "@/pages/DashBoard.vue"
 
 export default {
   components: {
-    DashBoard,
     Toast
   },
 

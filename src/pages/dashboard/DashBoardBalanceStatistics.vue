@@ -1,15 +1,14 @@
 <template>
-  <VContainer fluid>
-    <VRow>
-      <VCol cols="12" md="9">
-        <VCard :loading="loading">
-          <VCardText>
-            <VueApexCharts :options="options" :series="series" />
-          </VCardText>
-        </VCard>
-      </VCol>
-    </VRow>
-  </VContainer>
+  <VCard
+    :loading="loading"
+    variant="flat"
+    rounded="lg"
+    title="Статистика баланса"
+  >
+    <VCardText>
+      <VueApexCharts :options="options" :series="series" />
+    </VCardText>
+  </VCard>
 </template>
 
 <script>
@@ -17,8 +16,6 @@ import VueApexCharts from 'vue3-apexcharts'
 import api from "@/plugins/api"
 
 export default {
-  name: 'DashBoard',
-
   components: {
     VueApexCharts
   },
@@ -130,3 +127,4 @@ export default {
   }
 }
 </script>
+
