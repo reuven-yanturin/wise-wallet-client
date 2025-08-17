@@ -1,7 +1,7 @@
 <template>
   <VContainer fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Add new Category</h1>
+      <h1>Добавить Новую Категорию</h1>
     </div>
 
     <VRow>
@@ -12,12 +12,19 @@
               <VCol cols="12">
                 <VTextField
                   v-model="form.name"
-                  label="Name"
+                  label="Название Категории"
                   autofocus
                   variant="outlined"
                   density="compact"
                   hide-details="auto"
                   @keyup.enter="save"
+                />
+              </VCol>
+
+              <VCol cols="12">
+                <CategoriesAutocomplete
+                  v-model="form.parentId"
+                  label="Родительская Категория"
                 />
               </VCol>
             </VRow>
@@ -29,11 +36,11 @@
             <VSpacer/>
 
             <VBtn variant="text" :to="{ name: 'categories' }">
-              Back
+              Назад
             </VBtn>
 
             <VBtn color="primary" variant="flat" :loading="loading" @click="save">
-              Save
+              Сохранить
             </VBtn>
           </VCardActions>
         </VCard>
@@ -44,15 +51,18 @@
 
 <script>
 import api from '@/plugins/api.js'
+import CategoriesAutocomplete from "@/components/CategoriesAutocomplete.vue"
 
 export default {
   name: 'CategoryCreate',
+  components: { CategoriesAutocomplete },
 
   data: () => ({
     loading: false,
 
     form: {
-      name: ''
+      name: undefined,
+      parentId: undefined,
     }
   }),
 

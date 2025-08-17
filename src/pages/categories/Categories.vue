@@ -24,13 +24,20 @@
               v-model:items-per-page="itemsPerPage"
               :headers="[
                 { title: 'Id', key: 'id' },
-                { title: 'Category', key: 'name' },
-                { title: 'Actions', key: 'actions' },
+                { title: 'Категория', key: 'name' },
+                { title: 'Родительская', key: 'parent' },
+                { title: 'Действие', key: 'actions' },
               ]"
               :items="categories"
               :items-length="totalItems"
               :loading="loading"
             >
+              <template #item.parent="{item}">
+                <span v-if="item.parent">
+                  {{ item.parent.name }}
+                </span>
+              </template>
+
               <template #item.actions="{ item }">
                 <span v-if="item.isDeleted" class="text-error">
                   deleted

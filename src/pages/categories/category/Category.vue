@@ -11,9 +11,16 @@
             <VCol cols="12">
               <VTextField
                 v-model="form.name"
-                label="Name"
+                label="Название Категории"
                 variant="outlined"
                 hide-details="auto"
+              />
+            </VCol>
+
+            <VCol cols="12">
+              <CategoriesAutocomplete
+                v-model="form.parentId"
+                label="Родительская Категория"
               />
             </VCol>
           </VRow>
@@ -24,8 +31,12 @@
         <VCardActions>
           <VSpacer/>
 
+          <VBtn variant="text" :to="{ name: 'categories' }">
+            Назад
+          </VBtn>
+
           <VBtn color="primary" variant="flat" :loading="loading" @click="save">
-            Save
+            Сохранить
           </VBtn>
         </VCardActions>
       </VCard>
@@ -35,9 +46,14 @@
 
 <script>
 import api from '@/plugins/api.js'
+import CategoriesAutocomplete from "@/components/CategoriesAutocomplete.vue"
 
 export default {
   name: 'Category',
+
+  components: {
+    CategoriesAutocomplete
+  },
 
   props: {
     categoryId: { type: [String, Number], required: true }
@@ -49,7 +65,8 @@ export default {
     category: undefined,
 
     form: {
-      name: ''
+      name: undefined,
+      parentId: undefined,
     }
   }),
 
@@ -67,6 +84,7 @@ export default {
         this.category = data
 
         this.form.name = data.name
+        this.form.parentId = data.parent?.id
       } finally {
         this.loading = false
       }

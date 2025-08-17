@@ -1,9 +1,10 @@
 <template>
   <VAutocomplete
+    label="Category"
+    v-bind="$attrs"
     :model-value="modelValue"
     :items="categories"
     :loading="loading"
-    label="Category"
     item-value="id"
     item-title="name"
     variant="outlined"
@@ -17,6 +18,8 @@
 import api from "@/plugins/api"
 
 export default {
+  inheritAttrs: false,
+
   props: {
     modelValue: { type: Number, default: undefined },
   },
