@@ -26,6 +26,15 @@
                 label="Родительская Категория"
               />
             </VCol>
+
+            <VCol cols="12">
+              <VCheckbox
+                v-model="form.excludeFromMaaser"
+                label="Исключить из Маасер"
+                hide-details="auto"
+                color="primary"
+              />
+            </VCol>
           </VRow>
         </VCardText>
       </VCard>
@@ -70,6 +79,7 @@ export default {
     form: {
       name: undefined,
       parentId: undefined,
+      excludeFromMaaser: false,
     }
   }),
 
@@ -88,6 +98,7 @@ export default {
 
         this.form.name = data.name
         this.form.parentId = data.parent?.id
+        this.form.excludeFromMaaser = data.excludeFromMaaser
       } finally {
         this.loading = false
       }

@@ -4,48 +4,55 @@
       <h1>Добавить Новую Категорию</h1>
     </div>
 
-    <VRow>
-      <VCol cols="12" md="8">
-        <VCard variant="flat" class="rounded-lg">
-          <VCardText>
-            <VRow>
-              <VCol cols="12">
-                <VTextField
-                  v-model="form.name"
-                  label="Название Категории"
-                  autofocus
-                  variant="outlined"
-                  density="compact"
-                  hide-details="auto"
-                  @keyup.enter="save"
-                />
-              </VCol>
+    <div class="d-flex flex-column gap-3" style="max-width: 900px">
+      <VCard variant="flat" class="rounded-lg">
+        <VCardText>
+          <VRow>
+            <VCol cols="12">
+              <VTextField
+                v-model="form.name"
+                label="Название Категории"
+                autofocus
+                variant="outlined"
+                density="compact"
+                hide-details="auto"
+                @keyup.enter="save"
+              />
+            </VCol>
 
-              <VCol cols="12">
-                <CategoriesAutocomplete
-                  v-model="form.parentId"
-                  label="Родительская Категория"
-                />
-              </VCol>
-            </VRow>
-          </VCardText>
-        </VCard>
+            <VCol cols="12">
+              <CategoriesAutocomplete
+                v-model="form.parentId"
+                label="Родительская Категория"
+              />
+            </VCol>
 
-        <VCard variant="flat" class="rounded-lg">
-          <VCardActions>
-            <VSpacer/>
+            <VCol cols="12">
+              <VCheckbox
+                v-model="form.excludeFromMaaser"
+                label="Исключить из Маасер"
+                hide-details="auto"
+                color="primary"
+              />
+            </VCol>
+          </VRow>
+        </VCardText>
+      </VCard>
 
-            <VBtn variant="text" :to="{ name: 'categories' }">
-              Назад
-            </VBtn>
+      <VCard variant="flat" class="rounded-lg">
+        <VCardActions>
+          <VSpacer/>
 
-            <VBtn color="primary" variant="flat" :loading="loading" @click="save">
-              Сохранить
-            </VBtn>
-          </VCardActions>
-        </VCard>
-      </VCol>
-    </VRow>
+          <VBtn variant="text" :to="{ name: 'categories' }">
+            Назад
+          </VBtn>
+
+          <VBtn color="primary" variant="flat" :loading="loading" @click="save">
+            Сохранить
+          </VBtn>
+        </VCardActions>
+      </VCard>
+    </div>
   </VContainer>
 </template>
 
@@ -66,6 +73,7 @@ export default {
     form: {
       name: undefined,
       parentId: undefined,
+      excludeFromMaaser: false,
     }
   }),
 
