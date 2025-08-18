@@ -22,6 +22,7 @@ export default {
 
   props: {
     modelValue: { type: Number, default: undefined },
+    onlyParent: { type: Boolean },
   },
 
   data: () => ({
@@ -38,7 +39,9 @@ export default {
       this.loading = true
 
       try {
-        const { data } = await api.categories.getList()
+        const { data } = await api.categories.getList({
+          ...this.onlyParent && { onlyParent: this.onlyParent }
+        })
 
         this.categories = data
       } finally {

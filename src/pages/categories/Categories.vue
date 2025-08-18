@@ -14,6 +14,7 @@
       <VCol cols="12">
         <CategoriesFilter
           v-model:category="filter.category"
+          v-model:parent="filter.parent"
         />
       </VCol>
 
@@ -85,6 +86,7 @@ export default {
 
     filter: {
       category: undefined,
+      parent: undefined,
     },
   }),
 

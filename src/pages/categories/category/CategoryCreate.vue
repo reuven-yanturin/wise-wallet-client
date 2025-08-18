@@ -55,7 +55,10 @@ import CategoriesAutocomplete from "@/components/CategoriesAutocomplete.vue"
 
 export default {
   name: 'CategoryCreate',
-  components: { CategoriesAutocomplete },
+
+  components: {
+    CategoriesAutocomplete
+  },
 
   data: () => ({
     loading: false,

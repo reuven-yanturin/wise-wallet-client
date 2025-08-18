@@ -9,6 +9,14 @@
           />
         </VCol>
 
+        <VCol cols="12" md="3">
+          <CategoriesAutocomplete
+            :model-value="parent"
+            only-parent
+            @update:model-value="$emit('update:parent', $event)"
+          />
+        </VCol>
+
         <VCol cols="12" md="1">
           <VBtn variant="text" color="primary" @click="clearFilter">
             Clear
@@ -29,11 +37,13 @@ export default {
 
   props: {
     category: { type: Number, default: undefined },
+    parent: { type: Number, default: undefined },
   },
 
   methods: {
     clearFilter () {
       this.$emit('update:category', undefined)
+      this.$emit('update:parent', undefined)
     }
   }
 }

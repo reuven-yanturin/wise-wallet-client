@@ -6,7 +6,7 @@ export default {
 
     getAll: params => instance.get('categories', { params }),
 
-    getList: () => instance.get('categories/list'),
+    getList: params => instance.get('categories/list', { params }),
 
     getOne: categoryId => instance.get(`categories/${categoryId}`),
 
