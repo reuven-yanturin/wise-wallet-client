@@ -27,6 +27,27 @@
         <RouterLink :to="{ name: 'dashboard' }" class="logo">Wise</RouterLink>
 
         <VAppBarNavIcon @click="drawer = !drawer" />
+
+        <VSpacer />
+
+        <VMenu>
+          <template #activator="{ props }">
+            <VBtn v-bind="props" icon class="me-6">
+              <VAvatar
+                color="brown"
+                size="large"
+              >
+                <span class="text-h5">RY</span>
+              </VAvatar>
+            </VBtn>
+          </template>
+
+          <VList>
+            <VListItem title="Settings" />
+            <VListItem title="Help" />
+            <VListItem title="Logout" />
+          </VList>
+        </VMenu>
       </VAppBar>
 
       <VMain style="background-color: #f4f6f9;">
