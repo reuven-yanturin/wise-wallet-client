@@ -31,6 +31,7 @@
       v-model:end-date="filter.endDate"
       v-model:account="filter.account"
       v-model:category="filter.category"
+      v-model:parent="filter.parent"
       v-model:type="filter.type"
     />
 
@@ -141,6 +142,7 @@ export default {
       endDate: undefined,
       account: undefined,
       category: undefined,
+      parent: undefined,
       type: undefined,
     },
 

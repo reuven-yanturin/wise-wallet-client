@@ -2,7 +2,7 @@
   <VCard variant="flat" rounded="lg">
     <VCardText>
       <VRow>
-        <VCol cols="12" md="3">
+        <VCol cols="12" md="2">
           <DateSelect
             :start-date="startDate"
             :end-date="endDate"
@@ -11,17 +11,26 @@
           />
         </VCol>
 
-        <VCol cols="12" md="3">
+        <VCol cols="12" md="2">
           <AccountsAutocomplete
             :model-value="account"
             @update:model-value="$emit('update:account', $event)"
           />
         </VCol>
 
-        <VCol cols="12" md="3">
+        <VCol cols="12" md="2">
           <CategoriesAutocomplete
             :model-value="category"
             @update:model-value="$emit('update:category', $event)"
+          />
+        </VCol>
+
+        <VCol cols="12" md="2">
+          <CategoriesAutocomplete
+            :model-value="parent"
+            label="Parent Category"
+            only-parent
+            @update:model-value="$emit('update:parent', $event)"
           />
         </VCol>
 
@@ -61,6 +70,7 @@ export default {
     endDate: { type: [String, Date], default: undefined },
     account: { type: Number, default: undefined },
     category: { type: Number, default: undefined },
+    parent: { type: Number, default: undefined },
     type: { type: String, default: undefined },
   },
 
@@ -68,6 +78,7 @@ export default {
     clearFilter () {
       this.$emit('update:account', undefined)
       this.$emit('update:category', undefined)
+      this.$emit('update:parent', undefined)
       this.$emit('update:type', undefined)
     }
   }
