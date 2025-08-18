@@ -12,8 +12,11 @@
               <VTextField
                 v-model="form.name"
                 label="Название Категории"
+                autofocus
                 variant="outlined"
+                density="compact"
                 hide-details="auto"
+                @keyup.enter="save"
               />
             </VCol>
 

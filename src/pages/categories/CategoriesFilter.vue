@@ -13,6 +13,7 @@
           <CategoriesAutocomplete
             :model-value="parent"
             only-parent
+            label="Parent Category"
             @update:model-value="$emit('update:parent', $event)"
           />
         </VCol>
