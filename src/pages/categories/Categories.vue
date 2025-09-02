@@ -27,6 +27,7 @@
                 { title: 'Id', key: 'id' },
                 { title: 'Категория', key: 'name' },
                 { title: 'Родительская', key: 'parent' },
+                { title: 'Исключен из Маасер', key: 'excludeFromMaaser' },
                 { title: 'Действие', key: 'actions' },
               ]"
               :items="categories"

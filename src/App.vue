@@ -11,15 +11,15 @@
         @update:model-value="(val) => console.log(val)"
       >
         <VList density="compact" nav>
-          <VListItem :to="{ name: 'dashboard' }" title="Dashboard" exact />
+          <VListItem :to="{ name: 'dashboard' }" title="Dashboard" />
 
           <VListItem :to="{ name: 'transactions' }" title="Transactions" />
 
-          <VListItem :to="{ name: 'categories' }" title="Categories" exact />
+          <VListItem :to="{ name: 'categories' }" title="Categories" />
 
-          <VListItem :to="{ name: 'accounts' }" title="Accounts" exact />
+          <VListItem :to="{ name: 'accounts' }" title="Accounts" />
 
-          <VListItem :to="{ name: 'users' }" title="Users" exact />
+          <VListItem :to="{ name: 'users' }" title="Users" />
         </VList>
       </VNavigationDrawer>
 

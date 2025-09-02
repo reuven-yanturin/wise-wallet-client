@@ -61,7 +61,7 @@ const routes = [
     children: [
       {
         name: "transactions",
-        path: "/",
+        path: "",
         component: () => import("@/pages/transactions/Transactions.vue"),
       },
       {

@@ -154,7 +154,9 @@ export default {
     filter: {
       deep: true,
       immediate: true,
-      handler: 'getTransactions'
+      async handler () {
+        await this.getTransactions()
+      }
     }
   },
 
