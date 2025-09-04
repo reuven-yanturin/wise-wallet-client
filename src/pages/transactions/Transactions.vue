@@ -33,6 +33,7 @@
       v-model:category="filter.category"
       v-model:parent="filter.parent"
       v-model:type="filter.type"
+      v-model:amount="filter.amount"
     />
 
     <VCard variant="flat" rounded="lg">
@@ -144,6 +145,7 @@ export default {
       category: undefined,
       parent: undefined,
       type: undefined,
+      amount: undefined,
     },
 
     transactions: [],

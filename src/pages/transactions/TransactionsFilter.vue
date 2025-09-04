@@ -34,10 +34,22 @@
           />
         </VCol>
 
-        <VCol cols="12" md="2">
+        <VCol cols="12" md="auto" style="min-width: 130px;">
           <TransactionTypesSelect
             :model-value="type"
             @update:model-value="$emit('update:type', $event)"
+          />
+        </VCol>
+
+        <VCol cols="12" md="auto" style="min-width: 130px">
+          <VTextField
+            :model-value="amount"
+            label="Amount"
+            type="number"
+            variant="outlined"
+            density="compact"
+            hide-details="auto"
+            @update:model-value="$emit('update:amount', $event ? Number($event) : undefined)"
           />
         </VCol>
 
@@ -72,6 +84,7 @@ export default {
     category: { type: Number, default: undefined },
     parent: { type: Number, default: undefined },
     type: { type: String, default: undefined },
+    amount: { type: Number, default: undefined },
   },
 
   methods: {
@@ -80,6 +93,7 @@ export default {
       this.$emit('update:category', undefined)
       this.$emit('update:parent', undefined)
       this.$emit('update:type', undefined)
+      this.$emit('update:amount', undefined)
     }
   }
 }

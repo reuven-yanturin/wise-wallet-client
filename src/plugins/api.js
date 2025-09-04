@@ -52,6 +52,8 @@ export default {
 
     getExpensesCategories: () => instance.get('transactions/statistics/expenses-categories'),
 
+    getMaaserAmount: (params) => instance.get('transactions/maaser-amount', { params }),
+
     getRecurringTransactions: params => instance.get('transactions/recurring', { params }),
 
     getOne: transactionId => instance.get(`transactions/${transactionId}`),
