@@ -9,17 +9,11 @@
         </template>
 
         <VList>
-          <VListItem :to="{ name: 'transaction-create', query: { type: 'income' } }">
-            <VListItemTitle>Доход</VListItemTitle>
-          </VListItem>
+          <VListItem :to="{ name: 'transaction-create', query: { type: 'income' } }" title="Доход" />
 
-          <VListItem :to="{ name: 'transaction-create', query: { type: 'expense' }  }">
-            <VListItemTitle>Расход</VListItemTitle>
-          </VListItem>
+          <VListItem :to="{ name: 'transaction-create', query: { type: 'expense' } }" title="Расход" />
 
-          <VListItem :to="{ name: 'transaction-create', query: { type: 'transfer' }  }">
-            <VListItemTitle>Перевод</VListItemTitle>
-          </VListItem>
+          <VListItem :to="{ name: 'transaction-create', query: { type: 'transfer' } }" title="Перевод" />
         </VList>
       </VMenu>
 
@@ -155,7 +149,6 @@ export default {
   watch: {
     filter: {
       deep: true,
-      immediate: true,
       async handler () {
         await this.getTransactions()
       }

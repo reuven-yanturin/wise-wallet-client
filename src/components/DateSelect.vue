@@ -1,91 +1,70 @@
 <template>
   <VSelect
     v-model="selectDate"
-    :items="dates"
+    :items="months"
     label="Дата"
     variant="outlined"
     density="compact"
     hide-details="auto"
-    :menu-props="{ offsetY: true, contentClass: 'select-menu', nudgeBottom: 8 }"
-  />
+  >
+    <template #selection="{ item }">
+      {{ item.title }}
+    </template>
+  </VSelect>
 </template>
 
 <script>
+import 'dayjs/locale/ru'
+
 export default {
   props: {
     startDate: { type: [String, Date], default: undefined },
-    endDate: { type: [String, Date], default: undefined },
-    defaultDate: {
-      type: String,
-      default: 'month',
-      validator: value =>
-        [
-          'all',
-          'week',
-          'lastWeek',
-          'month',
-          'lastMonth',
-          'last3Months',
-          'year',
-          'lastYear',
-          'exact'
-        ].includes(value)
-    }
+    endDate: { type: [String, Date], default: undefined }
   },
 
   data: (vm) => ({
-    selectDate: vm.defaultDate
+    selectDate: vm.$dayjs()
   }),
 
   computed: {
-    dates: () => [
-      { value: 'all', title: 'Все' },
-      { value: 'week', title: 'Эта неделя' },
-      { value: 'lastWeek', title: 'Прошлая неделя' },
-      { value: 'month', title: 'Этот месяц' },
-      { value: 'lastMonth', title: 'Прошлый месяц' },
-      { value: 'last3Months', title: 'Прошлые 3 месяца' },
-      { value: 'year', title: 'Этот год' },
-      { value: 'lastYear', title: 'Прошлый год' },
-      { value: 'exact', title: 'Выбрать дату' }
-    ]
+    months: (vm) => {
+      vm.$dayjs.locale('ru')
+
+      const now = vm.$dayjs()
+
+      return Array
+        .from({ length: 12 }, (_, i) => {
+          const month = vm.$dayjs().startOf('year').add(i, 'month')
+
+          return {
+            title: month
+              .format('MMMM')
+              .replace(/^./, (ch) => ch.toUpperCase()),
+            value: {
+              startDate: vm.$dayjs(month).startOf('month').format(),
+              endDate: vm.$dayjs(month).endOf('month').format()
+            }
+          }
+        })
+        .filter(({ value }) =>
+          vm.$dayjs(value.endDate).isBefore(now) || vm.$dayjs(value.startDate).isSame(now, 'month')
+        )
+        .reverse()
+    }
   },
 
   watch: {
     selectDate: {
       handler(newSelectDate) {
-        this.$emit('update:start-date', this.getStartDate(newSelectDate))
-        this.$emit('update:end-date', this.getEndDate(newSelectDate))
+        if (newSelectDate) {
+          this.$emit('update:start-date', newSelectDate.startDate)
+          this.$emit('update:end-date', newSelectDate.endDate)
+        } else {
+          this.$emit('update:start-date', undefined)
+          this.$emit('update:end-date', undefined)
+        }
       },
       immediate: true
-    }
-  },
-
-  methods: {
-    getStartDate(value) {
-      return {
-        week: this.$dayjs().startOf('week').format("YYYY-MM-DD"),
-        lastWeek: this.$dayjs().add(-1, 'weeks').startOf('week').format(),
-        month: this.$dayjs().startOf('month').format(),
-        lastMonth: this.$dayjs().add(-1, 'months').startOf('month').format(),
-        last3Months: this.$dayjs().add(-3, 'months').startOf('month').format(),
-        year: this.$dayjs().startOf('year').format(),
-        lastYear: this.$dayjs().add(-1, 'years').startOf('year').format(),
-        exact: "exact"
-      }[value]
-    },
-
-    getEndDate(value) {
-      return {
-        week: this.$dayjs().endOf('week').format(),
-        lastWeek: this.$dayjs().add(-1, 'weeks').endOf('week').format(),
-        month: this.$dayjs().endOf('month').format(),
-        lastMonth: this.$dayjs().add(-1, 'months').endOf('month').format(),
-        last3Months: this.$dayjs().add(-1, 'months').endOf('month').format(),
-        year: this.$dayjs().endOf('year').format(),
-        lastYear: this.$dayjs().add(-1, 'years').endOf('year').format(),
-        exact: "exact"
-      }[value]
     }
   }
 }

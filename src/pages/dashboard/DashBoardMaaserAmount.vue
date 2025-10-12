@@ -11,7 +11,8 @@
         <VCard>
           <VList>
             <VListItem title="Этот Месяц" @click="date = $dayjs().format('YYYY-MM')" />
-            <VListItem title="Август" @click="date = $dayjs().add(-1, 'month').format('YYYY-MM')" />
+            <VListItem title="Сентябрь" @click="date = $dayjs().add(-1, 'month').format('YYYY-MM')" />
+            <VListItem title="Август" @click="date = $dayjs().add(-2, 'month').format('YYYY-MM')" />
             <VListItem title="Июль" @click="getMaaserAmount" />
             <VListItem title="Июнь" @click="getMaaserAmount" />
           </VList>
