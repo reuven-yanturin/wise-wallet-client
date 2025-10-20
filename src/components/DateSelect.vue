@@ -23,7 +23,10 @@ export default {
   },
 
   data: (vm) => ({
-    selectDate: vm.$dayjs()
+    selectDate: {
+      startDate: vm.$dayjs().startOf('month').format(),
+      endDate: vm.$dayjs().endOf('month').format()
+    },
   }),
 
   computed: {
@@ -66,6 +69,10 @@ export default {
       },
       immediate: true
     }
+  },
+
+  beforeUnmount() {
+    this.$dayjs.locale('en')
   }
 }
 </script>
