@@ -4,17 +4,19 @@
       <VMenu>
         <template #activator="{ props }">
           <VBtn variant="plain" v-bind="props">
-            {{ date }}
+            {{ $dayjs(date).format('MMMM') }}
           </VBtn>
         </template>
 
         <VCard>
           <VList>
-            <VListItem title="Этот Месяц" @click="date = $dayjs().format('YYYY-MM')" />
-            <VListItem title="Сентябрь" @click="date = $dayjs().add(-1, 'month').format('YYYY-MM')" />
-            <VListItem title="Август" @click="date = $dayjs().add(-2, 'month').format('YYYY-MM')" />
-            <VListItem title="Июль" @click="getMaaserAmount" />
-            <VListItem title="Июнь" @click="getMaaserAmount" />
+            <VListItem
+              v-for="(month, index) of months"
+              :key="index"
+              :title="month.title"
+              :active="date === month.value"
+              @click="date = month.value"
+            />
           </VList>
         </VCard>
       </VMenu>
@@ -29,15 +31,40 @@
 </template>
 
 <script>
+import 'dayjs/locale/ru'
 import api from "@/plugins/api"
 
 export default {
-  data: ({ $dayjs }) => ({
-    loading: false,
+  data: ({ $dayjs }) => {
+    $dayjs.locale('ru')
 
-    date: $dayjs().format('YYYY-MM'),
-    maaserAmount: undefined,
-  }),
+    return {
+      loading: false,
+
+      date: $dayjs().format('YYYY-MM'),
+      maaserAmount: undefined,
+    }
+  },
+
+  computed: {
+    months: (vm) => {
+      const now = vm.$dayjs()
+
+      return Array
+        .from({ length: 12 }, (_, i) => {
+          const month = vm.$dayjs().startOf('year').add(i, 'month')
+
+          return {
+            title: month.format('MMMM').replace(/^./, (ch) => ch.toUpperCase()),
+            value: month.format('YYYY-MM')
+          }
+        })
+        .filter(({ value }) =>
+          vm.$dayjs(value).isBefore(now) || vm.$dayjs(value).isSame(now, 'month')
+        )
+        .reverse()
+    }
+  },
 
   watch: {
     date: 'getMaaserAmount'
