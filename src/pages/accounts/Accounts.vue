@@ -39,7 +39,7 @@
               </template>
 
               <template #item.createdAt="{ item }">
-                {{ $dayjs(item.createdAt).format("DD MMM, YYYY") }}
+                {{ $dayjs(item.createdAt).format("DD MMM YYYY") }}
               </template>
 
               <template #item.actions="{ item }">

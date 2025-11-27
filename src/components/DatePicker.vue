@@ -63,6 +63,8 @@ export default {
         } else {
           this.$emit("update:modelValue", this.$dayjs(value).format())
         }
+
+        this.menu = false
       },
     },
   },

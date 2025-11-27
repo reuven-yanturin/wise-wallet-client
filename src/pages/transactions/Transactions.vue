@@ -75,7 +75,7 @@
                 {{ formatPriceMixin(item.amount) }}
               </td>
 
-              <td>{{ $dayjs(item.date).format("DD MMM, YYYY HH:mm") }}</td>
+              <td>{{ $dayjs(item.date).format("DD MMM YYYY HH:mm") }}</td>
 
               <td>
                 <VChip :color="{ income: 'success', expense: 'error', transfer: 'default' }[item.type]">

@@ -31,7 +31,7 @@
         </template>
 
         <template #item.date="{ item }">
-          {{ $dayjs(item.date).format("DD MMM, YYYY HH:mm") }}
+          {{ $dayjs(item.date).format("DD MMM YYYY HH:mm") }}
         </template>
 
         <template #item.type="{ item }">
