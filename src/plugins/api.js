@@ -50,7 +50,7 @@ export default {
 
     getBalanceStatistics: () => instance.get('transactions/statistics/balance'),
 
-    getExpensesCategories: () => instance.get('transactions/statistics/expenses-categories'),
+    getExpensesCategories: (params) => instance.get('transactions/statistics/expenses-categories', { params }),
 
     getMaaserAmount: (params) => instance.get('transactions/maaser-amount', { params }),
 

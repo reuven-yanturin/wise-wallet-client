@@ -2,7 +2,7 @@
   <VContainer fluid>
     <VRow>
       <VCol cols="12" md="8">
-        <DashBoardBalanceStatistics />
+        <DashBoardBalanceStatistics class="mb-6" />
 
         <DashBoardExpensesCategories />
       </VCol>

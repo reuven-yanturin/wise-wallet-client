@@ -5,6 +5,10 @@
     rounded="lg"
     title="Категории расходов"
   >
+    <template #append>
+      <MonthsSelect v-model="date" />
+    </template>
+
     <VCardText>
       <VueApexCharts :options="options" :series="series" />
     </VCardText>
@@ -14,9 +18,11 @@
 <script>
 import VueApexCharts from 'vue3-apexcharts'
 import api from "@/plugins/api"
+import MonthsSelect from "@/components/MonthsSelect.vue"
 
 export default {
   components: {
+    MonthsSelect,
     VueApexCharts
   },
 
@@ -24,7 +30,8 @@ export default {
     loading: false,
 
     labels: [],
-    series: []
+    series: [],
+    date: undefined,
   }),
 
   computed: {
@@ -74,6 +81,10 @@ export default {
     })
   },
 
+  watch: {
+    date: 'getExpensesCategories'
+  },
+
   async created() {
     await this.getExpensesCategories()
   },
@@ -83,7 +94,9 @@ export default {
       this.loading = true
 
       try {
-        const { data } = await api.transactions.getExpensesCategories()
+        const { data } = await api.transactions.getExpensesCategories({
+          date: this.date
+        })
 
         this.labels =  data.map(item => item.categoryName)
         this.series =  data.map(item => Number(item.amount))
