@@ -33,6 +33,17 @@
                 label="Исключить из Маасер"
                 hide-details="auto"
                 color="primary"
+                density="compact"
+              />
+            </VCol>
+
+            <VCol cols="12">
+              <VCheckbox
+                v-model="form.isTzedakah"
+                label="Является Цедакой"
+                hide-details="auto"
+                color="primary"
+                density="compact"
               />
             </VCol>
           </VRow>
@@ -80,6 +91,7 @@ export default {
       name: undefined,
       parentId: undefined,
       excludeFromMaaser: false,
+      isTzedakah: false,
     }
   }),
 
@@ -99,6 +111,7 @@ export default {
         this.form.name = data.name
         this.form.parentId = data.parent?.id
         this.form.excludeFromMaaser = data.excludeFromMaaser
+        this.form.isTzedakah = data.isTzedakah
       } finally {
         this.loading = false
       }
