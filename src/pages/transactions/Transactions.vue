@@ -18,6 +18,11 @@
       </VMenu>
 
       <UploadTransactions @success="getTransactions"/>
+
+      <VBtn variant="text" color="success" :loading="loadingDownload" @click="downloadJson">
+        <FontAwesomeIcon class="me-2" icon="file-arrow-down" size="xl" />
+        Скачать JSON
+      </VBtn>
     </div>
 
     <TransactionsFilter
@@ -130,6 +135,7 @@ export default {
 
   data: () => ({
     loading: false,
+    loadingDownload: false,
     itemsPerPage: 50,
 
     filter: {
@@ -170,6 +176,33 @@ export default {
         this.totalItems = data.count
       } finally {
         this.loading = false
+      }
+    },
+
+    async downloadJson() {
+      this.loadingDownload = true
+
+      try {
+        const { data } = await api.transactions.getAll(this.filter)
+
+        const transactions = data.transactions.map(transaction => ({
+          category: transaction.category?.name,
+          amount: this.formatPriceMixin(transaction.amount),
+          date: this.$dayjs(transaction.date).format("DD MMM YYYY"),
+          type: transaction.type
+        }))
+
+        const blob = new Blob([JSON.stringify(transactions, null, 2)], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'transactions.json'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+      } finally {
+        this.loadingDownload = false
       }
     },
 
