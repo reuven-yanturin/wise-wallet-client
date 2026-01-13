@@ -6,7 +6,11 @@
     title="Категории расходов"
   >
     <template #append>
-      <MonthsSelect v-model="date" />
+      <DateSelect
+        type="button"
+        :start-date="date"
+        @update:start-date="date = $dayjs($event).format('YYYY-MM')"
+      />
     </template>
 
     <VCardText>
@@ -18,11 +22,11 @@
 <script>
 import VueApexCharts from 'vue3-apexcharts'
 import api from "@/plugins/api"
-import MonthsSelect from "@/components/MonthsSelect.vue"
+import DateSelect from "@/components/DateSelect.vue"
 
 export default {
   components: {
-    MonthsSelect,
+    DateSelect,
     VueApexCharts
   },
 

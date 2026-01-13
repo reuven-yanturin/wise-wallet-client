@@ -1,7 +1,11 @@
 <template>
   <VCard :loading="loading" variant="flat" rounded="lg" title="Маасер">
     <template #append>
-      <MonthsSelect v-model="date" />
+      <DateSelect
+        type="button"
+        :start-date="date"
+        @update:start-date="date = $dayjs($event).format('YYYY-MM')"
+      />
     </template>
 
     <template v-if="maaser" #text>
@@ -25,11 +29,11 @@
 <script>
 import 'dayjs/locale/ru'
 import api from "@/plugins/api"
-import MonthsSelect from "@/components/MonthsSelect.vue"
+import DateSelect from "@/components/DateSelect.vue"
 
 export default {
   components: {
-    MonthsSelect
+    DateSelect,
   },
 
   data: () => ({

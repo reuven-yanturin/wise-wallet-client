@@ -6,7 +6,7 @@
 
     <VRow>
       <VCol cols="12" md="4">
-        <VCard variant="flat" class="rounded-lg">
+        <VCard variant="flat" rounded="lg" class="mb-6">
           <VCardText class="d-flex flex-column gap-6">
             <TransactionTypesSelect v-model="form.type" />
 
@@ -42,7 +42,7 @@
               label="Account To"
             />
 
-            <VCheckbox v-model="isRecurring" label="Повторять?" />
+            <VCheckbox v-model="isRecurring" label="Повторять?" hide-details />
 
             <VSelect
               v-if="isRecurring"
@@ -74,8 +74,12 @@
           <template #actions>
             <VSpacer/>
 
+            <VBtn color="primary" variant="text" :to="{ name: 'transactions' }">
+              Отмена
+            </VBtn>
+
             <VBtn color="primary" variant="flat" :loading="loading" @click="save">
-              Save
+              Добавить
             </VBtn>
           </template>
         </VCard>

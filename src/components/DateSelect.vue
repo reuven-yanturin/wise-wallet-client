@@ -2,6 +2,7 @@
   <VMenu v-model="menu" :close-on-content-click="false">
     <template #activator="{ props }">
       <VSelect
+        v-if="type === 'select'"
         :model-value="date"
         label="Дата"
         variant="outlined"
@@ -10,6 +11,10 @@
         readonly
         v-bind="props"
       />
+
+      <VBtn v-else-if="type === 'button'" variant="plain"  v-bind="props">
+        {{ date }}
+      </VBtn>
     </template>
 
     <VLocaleProvider locale="ru">
@@ -29,6 +34,7 @@ import 'dayjs/locale/ru'
 
 export default {
   props: {
+    type: { type: String, default: "select" },
     startDate: { type: [String, Date], default: undefined },
     endDate: { type: [String, Date], default: undefined }
   },
