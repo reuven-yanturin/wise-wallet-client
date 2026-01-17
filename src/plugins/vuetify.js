@@ -5,12 +5,14 @@
  */
 
 // Styles
+import "@fortawesome/fontawesome-free/css/all.css"
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
 // Composables
 import { createVuetify } from 'vuetify'
 import { ru, en } from 'vuetify/locale'
+import { aliases, fa } from "vuetify/iconsets/fa"
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
@@ -21,22 +23,16 @@ export default createVuetify({
     themes: {
       light: {
         colors: {
-          // primary: {
-          //   base: "#48B75B",
-          //   darken1: "#2D7439",
-          //   lighten5: "#f6fbf7",
-          // },
-          // secondary: {
-          //   base: "#558DBD",
-          //   darken1: "#264C6E",
-          // },
-          // tertiary: {
-          //   base: "#3F4448",
-          //   darken1: "#000000",
-          // },
+          primary: "#518243",
+          secondary: "#6a7c63",
           error: "#f44336",
         },
       },
     },
+  },
+  icons: {
+    defaultSet: "fa",
+    aliases,
+    sets: { fa },
   },
 })
