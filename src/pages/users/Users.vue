@@ -1,7 +1,7 @@
 <template>
   <VContainer fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Users</h1>
+      <h1 class="text-h3 font-weight-light">Users</h1>
 
       <VBtn color="primary" variant="flat" :to="{ name: 'user-create' }">
         Add New

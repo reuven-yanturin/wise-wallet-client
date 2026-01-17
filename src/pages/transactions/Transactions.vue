@@ -19,8 +19,8 @@
 
       <UploadTransactions @success="getTransactions"/>
 
-      <VBtn variant="text" color="success" :loading="loadingDownload" @click="downloadJson">
-        <FontAwesomeIcon class="me-2" icon="file-arrow-down" size="xl" />
+      <VBtn variant="text" color="primary" :loading="loadingDownload" @click="downloadJson">
+        <VIcon start icon="fa-solid fa-file-arrow-down" />
         Скачать JSON
       </VBtn>
     </div>
@@ -62,7 +62,7 @@
 
                   <template v-if="item.accountTo">
                     <span class="ml-8">
-                      <FontAwesomeIcon icon="arrow-down"/>
+                      <VIcon icon="fa-solid fa-arrow-down" size="x-small" />
                     </span>
 
                     <span>{{ item.accountTo.name }}</span>
@@ -85,11 +85,11 @@
               <td>
                 <VChip :color="{ income: 'success', expense: 'error', transfer: 'default' }[item.type]">
                   <template #prepend>
-                    <FontAwesomeIcon v-if="item.type === 'income'" icon="arrow-trend-up" class="mr-2"/>
+                    <VIcon v-if="item.type === 'income'" icon="fa-solid fa-arrow-trend-up" start size="small" />
 
-                    <FontAwesomeIcon v-if="item.type === 'expense'" icon="arrow-trend-down" class="mr-2"/>
+                    <VIcon v-if="item.type === 'expense'" icon="fa-solid fa-arrow-trend-down" start size="small" />
 
-                    <FontAwesomeIcon v-if="item.type === 'transfer'" icon="arrow-right-arrow-left" class="mr-2"/>
+                    <VIcon v-if="item.type === 'transfer'" icon="fa-solid fa-arrow-right-arrow-left" start size="small" />
                   </template>
 
                   {{ item.type }}
@@ -99,7 +99,7 @@
               <td>
                 <VMenu>
                   <template #activator="{ props }">
-                    <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
+                    <VBtn icon="fa-solid fa-ellipsis-vertical" variant="text" density="comfortable" v-bind="props" />
                   </template>
 
                   <VList>

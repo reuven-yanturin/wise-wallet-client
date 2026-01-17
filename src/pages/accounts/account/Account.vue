@@ -1,7 +1,7 @@
 <template>
   <VContainer fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Редактировать Счёт</h1>
+      <h1 class="text-h3 font-weight-light">Редактировать Счёт</h1>
     </div>
 
     <VRow>

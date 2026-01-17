@@ -8,7 +8,6 @@
 import App from './App.vue'
 import router from "@/router"
 import dayjsPlugin from "@/plugins/dayjs"
-import FontAwesomeIcon from '@/plugins/fontawesome'
 import vuetify from "@/plugins/vuetify"
 
 import formatPriceMixin from '@/mixins/formatPriceMixin.js'
@@ -29,5 +28,4 @@ app
   .use(dayjsPlugin)
   .mixin(formatPriceMixin)
   .mixin(toastMixin)
-  .component('FontAwesomeIcon', FontAwesomeIcon)
   .mount('#app')

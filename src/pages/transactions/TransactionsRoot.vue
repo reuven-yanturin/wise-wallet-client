@@ -2,7 +2,7 @@
   <VContainer fluid>
     <VRow>
       <VCol cols="12">
-        <h1>Транзакции</h1>
+        <h1 class="text-h3 font-weight-light">Транзакции</h1>
       </VCol>
 
       <VCol cols="12">

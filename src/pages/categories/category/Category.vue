@@ -1,7 +1,7 @@
 <template>
   <VContainer v-if="category" fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>{{ category.name }}</h1>
+      <h1 class="text-h3 font-weight-light">{{ category.name }}</h1>
     </div>
 
     <div class="d-flex flex-column gap-3" style="max-width: 900px">

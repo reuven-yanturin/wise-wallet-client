@@ -9,7 +9,7 @@
 
           <VMenu>
             <template #activator="{ props }">
-              <VBtn icon="mdi-dots-vertical" variant="text" density="comfortable" v-bind="props" />
+              <VBtn icon="fa-solid fa-ellipsis-vertical" variant="text" density="comfortable" v-bind="props" />
             </template>
 
             <VList>

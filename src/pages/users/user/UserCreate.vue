@@ -1,7 +1,7 @@
 <template>
   <VContainer fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Add new User</h1>
+      <h1 class="text-h3 font-weight-light">Add new User</h1>
     </div>
 
     <VRow>

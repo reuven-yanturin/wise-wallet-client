@@ -1,7 +1,7 @@
 <template>
   <VContainer fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Добавить Новую Категорию</h1>
+      <h1 class="text-h3 font-weight-light">Добавить Новую Категорию</h1>
     </div>
 
     <div class="d-flex flex-column gap-3" style="max-width: 900px">

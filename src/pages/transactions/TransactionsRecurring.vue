@@ -37,11 +37,11 @@
         <template #item.type="{ item }">
           <VChip :color="{ income: 'success', expense: 'error', transfer: 'default' }[item.type]">
             <template #prepend>
-              <FontAwesomeIcon v-if="item.type === 'income'" icon="arrow-trend-up" class="mr-2"/>
+              <VIcon v-if="item.type === 'income'" icon="fa-solid fa-arrow-trend-up" start size="small" />
 
-              <FontAwesomeIcon v-if="item.type === 'expense'" icon="arrow-trend-down" class="mr-2"/>
+              <VIcon v-if="item.type === 'expense'" icon="fa-solid fa-arrow-trend-down" start size="small" />
 
-              <FontAwesomeIcon v-if="item.type === 'transfer'" icon="arrow-right-arrow-left" class="mr-2"/>
+              <VIcon v-if="item.type === 'transfer'" icon="fa-solid fa-arrow-right-arrow-left" start size="small" />
             </template>
 
             {{ item.type }}

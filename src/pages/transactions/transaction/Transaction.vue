@@ -1,7 +1,7 @@
 <template>
   <VContainer v-if="transaction" fluid>
     <div class="d-flex justify-space-between align-center mb-4">
-      <h1>Edit Transaction</h1>
+      <h1 class="text-h3 font-weight-light">Edit Transaction</h1>
     </div>
 
     <VRow>

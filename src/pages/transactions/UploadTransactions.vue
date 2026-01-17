@@ -1,7 +1,7 @@
 <template>
   <VDialog v-model="dialog" scrollable width="600">
     <template #activator="{props}">
-      <VBtn color="success" variant="flat" v-bind="props">
+      <VBtn color="primary" variant="outlined" v-bind="props">
         Upload transactions
       </VBtn>
     </template>
